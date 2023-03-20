@@ -10,7 +10,7 @@ body {
 .listings {
    display: flex;
    flex-direction: row;
-   column-gap: 10rem;
+   column-gap: 50px;
    padding: 2rem;
 }
 
