@@ -1,4 +1,4 @@
-var listingData = [
+var defaultListingsData = [
     {
         id: "0",
         user: "user0",

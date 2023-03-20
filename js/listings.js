@@ -1,5 +1,9 @@
 const DESCRIPTION_LEN = 50;
 
+function handleDetails(buttonId) {
+    console.log(`clicked ${buttonId}`);
+}
+
 function getListingImage(listingData) {
     var listingImage = document.createElement("img");
     listingImage.src = listingData["image"];
@@ -45,6 +49,8 @@ function getListing(listingData, shortenDescription) {
 
     var listingButton = document.createElement("button");
     listingButton.id = "listing-" + listingData["id"];
+    listingButton.setAttribute("data-toggle", "modal");
+    listingButton.setAttribute("data-target", "#listing-modal");
     listingButton.onclick = function() {
         handleDetails(listingButton.id)
     };
@@ -56,12 +62,18 @@ function getListing(listingData, shortenDescription) {
 }
 
 function displayListings() {
+    if (localStorage.listingData === undefined) {
+        localStorage.listingsData = JSON.stringify(defaultListingsData);
+    }
+    var listingsData = JSON.parse(localStorage.listingsData);
+
     var listingsDiv = document.getElementsByClassName("listings")[0];
-    listingData.forEach(function(listingData) {
+    listingsDiv.replaceChildren();
+    listingsData.forEach(function(listingData) {
         listingsDiv.appendChild(getListing(listingData, true))
     });
 }
-
+  
 document.addEventListener("DOMContentLoaded", function(event) {
     displayListings();
 });
