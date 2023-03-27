@@ -45,6 +45,21 @@ body {
    padding-right: 1rem;
 }
 
+.subtitle {
+   padding-top: 1rem;
+   padding-bottom: 1.5rem;
+   padding-left: 20rem;
+   padding-right: 1rem;
+}
+
+.reserve {
+   padding-top: 1rem;
+   padding-bottom: 1.5rem;
+   padding-left: 20rem;
+   padding-right: 1rem;
+   font-size: 1.3em; 
+}
+
 .hidden {
    visibility: hidden;
    overflow: hidden;
@@ -54,6 +69,14 @@ body {
 .login {
    width: 40%;
    margin: 0 auto;
+}
+
+.card {
+   margin-left: 20%;
+   border:1px solid black;
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+   transition: 0.3s;
+   border-radius: 5px; /* 5px rounded corners */
 }
 
 @media screen and (max-width: 600px) {
