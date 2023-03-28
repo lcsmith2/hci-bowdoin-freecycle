@@ -61,6 +61,55 @@ function getListing(listingData, shortenDescription) {
     return listing;
 }
 
+function searchListings(searchString){
+    searchString = searchString.toLowerCase(); 
+    
+    if (localStorage.listingData === undefined) {
+        localStorage.listingsData = JSON.stringify(defaultListingsData);
+    }
+    var listingsData = JSON.parse(localStorage.listingsData);
+    //look at name and description
+
+    var filteredListings;
+    listingsData.forEach( function(entry) {
+        //caseless matching
+        var matchName = entry["name"].toLowerCase().search(searchString);
+        var matchDescription = entry["description"].toLowerCase().search(searchString);
+
+        if(matchName != -1 || matchDescription != -1){
+            filteredListings.appendChild(getListing(entry, true));
+        }
+    }
+    );
+
+    return filteredListings;
+
+
+
+
+}
+
+function filterListings(category){
+    if (localStorage.listingData === undefined) {
+        localStorage.listingsData = JSON.stringify(defaultListingsData);
+    }
+    var listingsData = JSON.parse(localStorage.listingsData);
+
+    var filteredListings;
+    listingsData.forEach( function(entry) {
+        //check category value match
+        if(entry.category == category){
+            filteredListings.appendChild(getListing(entry, true));
+        }
+        
+        }
+    );
+
+    return filteredListings;
+
+
+}
+
 function displayListings() {
     if (localStorage.listingData === undefined) {
         localStorage.listingsData = JSON.stringify(defaultListingsData);
