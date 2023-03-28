@@ -23,6 +23,11 @@ function getListingInfo(listingData, shortenDescription) {
     listingPrice.appendChild(document.createTextNode(price));
     listingInfo.appendChild(listingPrice);
 
+    var listingCategory = document.createElement("p");
+    var category  = listingData["category"];
+    listingCategory.appendChild(document.createTextNode(category));
+    listingInfo.appendChild(listingCategory);
+
     var listingCondition = document.createElement("p");
     listingCondition.appendChild(document.createTextNode(listingData["condition"]));
     listingInfo.appendChild(listingCondition);
