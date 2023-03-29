@@ -30,10 +30,6 @@ body {
    column-gap: 20px;
 }
 
-.listing-info {
-   padding: 10px;
-}
-
 .listing p {
    font-size: 1.3em;   
 }
@@ -86,6 +82,24 @@ body {
    border-radius: 5px; 5px rounded corners */
 }
 
+.modal-title {
+   text-align: center;
+}
+
+.modal-header {
+   margin-bottom: 0;
+   padding-bottom: 0;
+}
+
+.modal-body img {
+   width: 100%;
+   height: auto;
+   max-width: 30vw;
+   max-height: 30vw;
+   min-width: 300px;
+   min-height: 300px;
+}
+
 @media screen and (max-width: 600px) {
    .listings {
       flex-direction: column;
@@ -98,6 +112,11 @@ body {
       align-items: center;
       row-gap: 0;
       column-gap: 20px;
+   }
+
+   .modal-body img {
+      min-width: 200px;
+      min-height: 200px;
    }
 
 }

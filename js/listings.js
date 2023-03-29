@@ -1,6 +1,37 @@
 const DESCRIPTION_LEN = 50;
 
 function handleDetails(buttonId) {
+    var listingId = buttonId.split("-")[1];
+
+    var listingsData = getListingsData();
+    var listingData = listingsData.find(function(listing) {
+        return listing["id"] === listingId
+    });
+
+    var modalBody = document.getElementsByClassName("modal-body")[0];
+    modalBody.replaceChildren();
+
+    modalBody.appendChild(getListingImage(listingData));
+    modalBody.appendChild(getListingInfo(listingData, false));
+    modalBodyContent = modalBody.childNodes[1];
+    modalBodyContent.firstChild.firstChild.nodeValue = listingData["name"];
+    var descriptionLine = document.createElement("p");
+    descriptionLine.appendChild(document.createTextNode("Description: "));
+    modalBodyContent.insertBefore(descriptionLine, modalBodyContent.childNodes[3]);
+
+    var requestInfo = document.createElement("p");
+    var requestInfoText = `This item currently has ${listingData["requests"].length} request(s).`;
+    requestInfo.appendChild(document.createTextNode(requestInfoText));
+    modalBodyContent.appendChild(requestInfo);
+
+    var requestButton = document.getElementsByClassName("request-btn")[0];
+    requestButton.id = "request-" + listingId;
+    requestButton.onclick = function() {
+        handleRequest(requestButton.id)
+    };
+}
+
+function handleRequest(buttonId) {
     console.log(`clicked ${buttonId}`);
 }
 
@@ -15,16 +46,17 @@ function getListingInfo(listingData, shortenDescription) {
     listingInfo.classList.add("listing-info");
 
     var listingName = document.createElement("h3");
-    listingName.appendChild(document.createTextNode(`${listingData["name"]} (${listingData["amount"]})`));
+    var title = `${listingData["name"]} (${listingData["requests"].length} requests)`;
+    listingName.appendChild(document.createTextNode(title));
     listingInfo.appendChild(listingName);
 
     var listingPrice = document.createElement("p");
     var price = listingData["price"] === "Free" ? listingData["price"] : "$" + listingData["price"];
-    listingPrice.appendChild(document.createTextNode(price));
+    listingPrice.appendChild(document.createTextNode(`Price: ${price}`));
     listingInfo.appendChild(listingPrice);
 
     var listingCondition = document.createElement("p");
-    listingCondition.appendChild(document.createTextNode(listingData["condition"]));
+    listingCondition.appendChild(document.createTextNode(`Condition: ${listingData["condition"]}`));
     listingInfo.appendChild(listingCondition);
 
     var listingDescription = document.createElement("p");
@@ -49,6 +81,7 @@ function getListing(listingData, shortenDescription) {
 
     var listingButton = document.createElement("button");
     listingButton.id = "listing-" + listingData["id"];
+    listingButton.classList.add("btn", "btn-primary");
     listingButton.setAttribute("data-toggle", "modal");
     listingButton.setAttribute("data-target", "#listing-modal");
     listingButton.onclick = function() {
@@ -62,10 +95,7 @@ function getListing(listingData, shortenDescription) {
 }
 
 function displayListings() {
-    if (localStorage.listingData === undefined) {
-        localStorage.listingsData = JSON.stringify(defaultListingsData);
-    }
-    var listingsData = JSON.parse(localStorage.listingsData);
+    var listingsData = getListingsData();
 
     var listingsDiv = document.getElementsByClassName("listings")[0];
     listingsDiv.replaceChildren();
