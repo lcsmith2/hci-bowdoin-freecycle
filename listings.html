@@ -11,6 +11,7 @@
   <!-- stylesheets-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="stylesheets/main.css" >
+  <link rel="stylesheet" href="stylesheets/listing.css" >
   
 </head>
 <body>
@@ -43,10 +44,14 @@
       <h1 class="text-center">Current Listings</h1>
     </div>
 
-    <div class = "searchbar"></div>
-    <div class = "button"><p>Search</p></div>
+    <div class = "searchbar">
 
-    <div class = "button"><p>Filter</p></div>
+      <input type = "text" id = "search">
+      <button class = "button " id = "searchbutton" onclick = "performSearch()"><p>Search</p></button>
+      <button class = "button" id = "filterbutton"><p>Filter</p></button>
+
+    </div>
+    
     
 
     <div class="listings">

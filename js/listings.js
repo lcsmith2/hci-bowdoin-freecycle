@@ -66,6 +66,14 @@ function getListing(listingData, shortenDescription) {
     return listing;
 }
 
+
+function performSearch(){
+    var searchQuery = document.getElementById("searchbutton").value;
+    var filteredListings = searchListings(searchQuery);
+    displaySearcgListings(filteredListings);
+
+
+}
 function searchListings(searchString){
     searchString = searchString.toLowerCase(); 
     
@@ -111,9 +119,21 @@ function filterListings(category){
     );
 
     return filteredListings;
-
-
 }
+
+function displaySearchListings(terms) {
+    
+    var data = JSON.stringify(terms);
+    
+    var listingsData = JSON.parse(data);
+
+    var listingsDiv = document.getElementsByClassName("listings")[0];
+    listingsDiv.replaceChildren();
+    listingsData.forEach(function(listingData) {
+        listingsDiv.appendChild(getListing(listingData, true))
+    });
+}
+
 
 function displayListings() {
     if (localStorage.listingData === undefined) {
