@@ -32,7 +32,15 @@ function handleDetails(buttonId) {
 }
 
 function handleRequest(buttonId) {
-    console.log(`clicked ${buttonId}`);
+    if (localStorage.user === undefined) {
+        var loginAlert = document.getElementsByClassName("login-alert")[0];
+        loginAlert.classList.remove("hidden");
+    }
+}
+
+function hideLoginAlert() {
+    var loginAlert = document.getElementsByClassName("login-alert")[0];
+    loginAlert.classList.add("hidden");
 }
 
 function getListingImage(listingData) {

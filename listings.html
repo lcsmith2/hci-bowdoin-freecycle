@@ -31,7 +31,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li id="main-button"><a href="index.html">Home</a><span class="sr-only">(current)</span></li>
-            <li id="flavor-button" class="active"><a href="#">Listings</a></li>
+            <li id="listings-button" class="active"><a href="#">Listings</a></li>
             <li><a href="login.html">Login</a></li>
           </ul>
         </div>
@@ -58,7 +58,10 @@
         </div>
         <div class="modal-body listing"></div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <div class="hidden login-alert alert" role="alert">
+            You must <a href="login.html" class="alert-link">log in</a> to request items.
+          </div>
+          <button onclick="hideLoginAlert()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="request-btn btn btn-primary">Request</button>
         </div>
       </div>
