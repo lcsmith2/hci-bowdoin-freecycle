@@ -68,42 +68,53 @@ function getListing(listingData, shortenDescription) {
 
 
 function performSearch(){
-    var searchQuery = document.getElementById("searchbutton").value;
+    var searchQuery = document.getElementById("search").value;
+    console.log(searchQuery);
+
     var filteredListings = searchListings(searchQuery);
-    displaySearcgListings(filteredListings);
+    displaySearchListings(filteredListings);
 
 
 }
 function searchListings(searchString){
     searchString = searchString.toLowerCase(); 
     
-    if (localStorage.listingData === undefined) {
+    if (localStorage.listingsData === undefined) {
         localStorage.listingsData = JSON.stringify(defaultListingsData);
     }
     var listingsData = JSON.parse(localStorage.listingsData);
     //look at name and description
 
-    var filteredListings;
+    let listingsObj = [];
     listingsData.forEach( function(entry) {
+       
         //caseless matching
         var matchName = entry["name"].toLowerCase().search(searchString);
         var matchDescription = entry["description"].toLowerCase().search(searchString);
-
+        console.log(entry["name"]);
+        
         if(matchName != -1 || matchDescription != -1){
-            filteredListings.appendChild(getListing(entry, true));
+            //filteredListings.appendChild(searched);
+            console.log("Match!");
+            console.log(entry);
+            console.log("parse", JSON.stringify(entry));
+           
+            listingsObj.push(JSON.stringify(entry));
+            
+            // filtered= JSON.parse(filteredListings);
+            // filteredListings.appendChild(JSON.stringify(entry));
+           
         }
     }
     );
 
-    return filteredListings;
-
-
-
+    console.log(JSON.stringify(listingsObj));
+    return listingsObj;
 
 }
 
 function filterListings(category){
-    if (localStorage.listingData === undefined) {
+    if (localStorage.listingsData === undefined) {
         localStorage.listingsData = JSON.stringify(defaultListingsData);
     }
     var listingsData = JSON.parse(localStorage.listingsData);
@@ -123,20 +134,26 @@ function filterListings(category){
 
 function displaySearchListings(terms) {
     
-    var data = JSON.stringify(terms);
+    //var data = JSON.parse(terms);
+    console.log(terms);
+    //var listingsData = JSON.parse(terms);
+    console.log("listings data", terms);
     
-    var listingsData = JSON.parse(data);
+   
 
     var listingsDiv = document.getElementsByClassName("listings")[0];
     listingsDiv.replaceChildren();
-    listingsData.forEach(function(listingData) {
+    terms.forEach(function(listingData) {
+        listingData = JSON.parse(listingData);
         listingsDiv.appendChild(getListing(listingData, true))
     });
+
+
 }
 
 
 function displayListings() {
-    if (localStorage.listingData === undefined) {
+    if (localStorage.listingsData === undefined) {
         localStorage.listingsData = JSON.stringify(defaultListingsData);
     }
     var listingsData = JSON.parse(localStorage.listingsData);
