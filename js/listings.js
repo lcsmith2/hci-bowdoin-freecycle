@@ -138,11 +138,18 @@ function displaySearchListings(terms) {
     console.log(terms);
     //var listingsData = JSON.parse(terms);
     console.log("listings data", terms);
+    console.log(terms.length);
     
-   
-
+    
     var listingsDiv = document.getElementsByClassName("listings")[0];
     listingsDiv.replaceChildren();
+    if(terms.length == 0){
+        let h1 = document.createElement("h1");
+        let txt = document.createTextNode("Sorry, nothing came up for your search.");
+        h1.appendChild(txt);
+        listingsDiv.appendChild(h1);
+    }
+
     terms.forEach(function(listingData) {
         listingData = JSON.parse(listingData);
         listingsDiv.appendChild(getListing(listingData, true))
