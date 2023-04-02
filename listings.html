@@ -58,10 +58,16 @@
         </div>
         <div class="modal-body listing"></div>
         <div class="modal-footer">
-          <div class="hidden login-alert alert" role="alert">
-            You must <a href="login.html" class="alert-link">log in</a> to request items.
+          <div class="hidden request-alert alert" role="alert">
+            Unable to request: You must <a href="login.html" class="alert-link">log in</a> to request items.
           </div>
-          <button onclick="hideLoginAlert()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <div class="hidden request-alert alert" role="alert">
+            Unable to request: You can't make a request on your own listing.
+          </div>
+          <div class="hidden request-alert alert" role="alert">
+            Unable to request: You already made a request for this listing.
+          </div>
+          <button onclick="hideRequestAlerts()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="request-btn btn btn-primary">Request</button>
         </div>
       </div>

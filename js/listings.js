@@ -20,7 +20,8 @@ function handleDetails(buttonId) {
     modalBodyContent.insertBefore(descriptionLine, modalBodyContent.childNodes[3]);
 
     var requestInfo = document.createElement("p");
-    var requestInfoText = `This item currently has ${listingData["requests"].length} request(s).`;
+    var req = listingData["requests"].length === 1 ? "request" : "requests";
+    var requestInfoText = `This item currently has ${listingData["requests"].length} ${req}.`;
     requestInfo.appendChild(document.createTextNode(requestInfoText));
     modalBodyContent.appendChild(requestInfo);
 
@@ -31,16 +32,44 @@ function handleDetails(buttonId) {
     };
 }
 
-function handleRequest(buttonId) {
-    if (localStorage.user === undefined) {
-        var loginAlert = document.getElementsByClassName("login-alert")[0];
-        loginAlert.classList.remove("hidden");
-    }
+function addRequest(listingsData, listingIndex) {
+    listingsData[listingIndex]["requests"].push({ "user": localStorage.user });
+    localStorage.listingsData = JSON.stringify(listingsData);
+    location.href = "request-confirmed.html";
 }
 
-function hideLoginAlert() {
-    var loginAlert = document.getElementsByClassName("login-alert")[0];
-    loginAlert.classList.add("hidden");
+function handleRequest(buttonId) {
+    var listingId = buttonId.split("-")[1];
+    var alerts = document.getElementsByClassName("request-alert");
+    // User isn't logged in
+    if (localStorage.user === undefined || localStorage.user === null) {
+        alerts[0].classList.remove("hidden");
+        return;
+    }
+    var listingsData = getListingsData();
+    var listingIndex = listingsData.findIndex(function(listing) {
+        return listing["id"] === listingId
+    });
+    // User owns the listing they're trying to request
+    if (localStorage.user === listingsData[listingIndex]["user"]) {
+        alerts[1].classList.remove("hidden");
+        return;
+    }
+    // User already requested this listing
+    if (listingsData[listingIndex]["requests"].some(function(req) {
+        return req["user"] === localStorage.user
+    })) {
+        alerts[2].classList.remove("hidden");
+        return;
+    }
+    addRequest(listingsData, listingIndex);
+}
+
+function hideRequestAlerts() {
+    var alerts = Array.from(document.getElementsByClassName("request-alert"));
+    alerts.forEach(function(alert) {
+        alert.classList.add("hidden")
+    });
 }
 
 function getListingImage(listingData) {
@@ -54,7 +83,8 @@ function getListingInfo(listingData, shortenDescription) {
     listingInfo.classList.add("listing-info");
 
     var listingName = document.createElement("h3");
-    var title = `${listingData["name"]} (${listingData["requests"].length} requests)`;
+    var req = listingData["requests"].length === 1 ? "request" : "requests";
+    var title = `${listingData["name"]} (${listingData["requests"].length} ${req})`;
     listingName.appendChild(document.createTextNode(title));
     listingInfo.appendChild(listingName);
 
