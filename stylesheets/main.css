@@ -86,11 +86,6 @@ body {
    text-align: center;
 }
 
-.modal-header {
-   margin-bottom: 0;
-   padding-bottom: 0;
-}
-
 .modal-body img {
    width: 100%;
    height: auto;
