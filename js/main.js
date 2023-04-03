@@ -9,4 +9,9 @@ $(document).ready(function() {
     });
   });
 
-
+function getListingsData() {
+  if (localStorage.listingsData === undefined) {
+    localStorage.listingsData = JSON.stringify(defaultListingsData);
+  }
+  return JSON.parse(localStorage.listingsData);
+}
