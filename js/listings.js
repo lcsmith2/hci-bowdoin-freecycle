@@ -76,6 +76,24 @@ function performSearch(){
 
 
 }
+
+function performFilter(){
+
+    let filterButton = document.getElementById("filterbutton");
+    filterButton.setAttribute("data-toggle", "modal");
+    filterButton.setAttribute("data-target", "#filter-modal");
+    document.getElementById("filter-modal").setAttribute("aria-hidden", "false");
+    console.log("aria visible??");
+    let executeFilter = document.getElementById("filter_button");
+    executeFilter.onclick = function(){
+        var filteredListings =filterListings();
+        displayFilterListings(filteredListings);
+    }
+    
+    
+
+
+}
 function searchListings(searchString){
     searchString = searchString.toLowerCase(); 
     
@@ -113,17 +131,55 @@ function searchListings(searchString){
 
 }
 
-function filterListings(category){
+function filterListings(){
     if (localStorage.listingsData === undefined) {
         localStorage.listingsData = JSON.stringify(defaultListingsData);
     }
     var listingsData = JSON.parse(localStorage.listingsData);
 
+    //get filter info
+
+    //by category
+    let categoryStates;
+    let catInfo = document.getElementById("category_check");
+    const category_children = catInfo.childNodes;
+    category_children.forEach(function(checkbox) {
+        if(checkbox.nodeName == "INPUT"){
+            console.log(checkbox.value);
+            if(checkbox.checked ){
+                categoryStates.appendChild(checkbox.value);
+            }
+        }
+        
+    }
+    );
+    //by condition
+    let conditionStates;
+    let condition = document.querySelector("condition");
+    const condition_children = condition.childNodes;
+    condition_children.forEach(function(checkbox) {
+        if(checkbox.checked ){
+            conditionStates.appendChild(checkbox.value);
+        }
+    }
+    );
+    //price
+    let price_lim = price_limit.value;
+    let isFree = (price == 0 || price == null) ? true : false;
+
+
     var filteredListings;
     listingsData.forEach( function(entry) {
+
         //check category value match
-        if(entry.category == category){
-            filteredListings.appendChild(getListing(entry, true));
+        if(entry.category.toLowerCase( ) in categoryStates && entry.condition.toLowerCase() in conditionStates){
+            if(isFree){
+                if(entry.price == "Free") filteredListings.appendChild(getListing(entry, true));
+
+            } else {
+                if(parseFloat(entry.price) < parseFloat(price_lim)) filteredListings.appendChild(getListing(entry, true));
+            }
+            
         }
         
         }
@@ -158,6 +214,32 @@ function displaySearchListings(terms) {
 
 }
 
+function displayFilterListings(terms) {
+    
+    //var data = JSON.parse(terms);
+    console.log(terms);
+    //var listingsData = JSON.parse(terms);
+    console.log("filtered listing data data", terms);
+    console.log(terms.length);
+    
+    
+    var listingsDiv = document.getElementsByClassName("listings")[0];
+    listingsDiv.replaceChildren();
+    if(terms.length == 0){
+        let h1 = document.createElement("h1");
+        let txt = document.createTextNode("Sorry, nothing came up for your filters.");
+        h1.appendChild(txt);
+        listingsDiv.appendChild(h1);
+    }
+
+    terms.forEach(function(listingData) {
+        listingData = JSON.parse(listingData);
+        listingsDiv.appendChild(getListing(listingData, true))
+    });
+
+
+}
+
 
 function displayListings() {
     if (localStorage.listingsData === undefined) {
@@ -172,6 +254,8 @@ function displayListings() {
     });
 }
   
+
+
 document.addEventListener("DOMContentLoaded", function(event) {
     displayListings();
 });
