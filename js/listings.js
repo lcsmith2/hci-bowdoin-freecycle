@@ -77,23 +77,25 @@ function performSearch(){
 
 }
 
-function performFilter(){
+function openFilterPopup(){
 
+    
     let filterButton = document.getElementById("filterbutton");
     filterButton.setAttribute("data-toggle", "modal");
     filterButton.setAttribute("data-target", "#filter-modal");
     document.getElementById("filter-modal").setAttribute("aria-hidden", "false");
     console.log("aria visible??");
-    let executeFilter = document.getElementById("filter_button");
-    executeFilter.onclick = function(){
-        var filteredListings =filterListings();
-        displayFilterListings(filteredListings);
-    }
     
-    
-
-
+     
 }
+   
+function performFilter(){
+    displayFilterListings(filterListings());
+}
+    
+
+
+
 function searchListings(searchString){
     searchString = searchString.toLowerCase(); 
     
@@ -140,41 +142,49 @@ function filterListings(){
     //get filter info
 
     //by category
-    let categoryStates;
+    let categoryStates = new Array();
     let catInfo = document.getElementById("category_check");
     const category_children = catInfo.childNodes;
-    category_children.forEach(function(checkbox) {
-        if(checkbox.nodeName == "INPUT"){
-            console.log(checkbox.value);
-            if(checkbox.checked ){
-                categoryStates.appendChild(checkbox.value);
+    category_children.forEach(function(node) {
+        if(node.nodeName == "INPUT"){
+            console.log(node.value);
+            if(node.checked ){
+                categoryStates.push(node.value);
             }
         }
         
     }
     );
+    console.log(categoryStates);
     //by condition
-    let conditionStates;
-    let condition = document.querySelector("condition");
+    let conditionStates = new Array();
+    let condition = document.getElementById("condition");
     const condition_children = condition.childNodes;
-    condition_children.forEach(function(checkbox) {
-        if(checkbox.checked ){
-            conditionStates.appendChild(checkbox.value);
+    condition_children.forEach(function(node) {
+        if(node.nodeName == "INPUT"){
+            console.log(node.value);
+            if(node.checked ){
+                conditionStates.push(node.value);
+            }
         }
     }
     );
+    console.log(conditionStates);
     //price
+    let price_limit = document.getElementById("price_limit");
+    console.log("price, ",price_limit.value);
     let price_lim = price_limit.value;
-    let isFree = (price == 0 || price == null) ? true : false;
+    let isFree = (price_lim == 0 || price_lim == null || price_lim == "") ? true : false;
 
 
     var filteredListings;
     listingsData.forEach( function(entry) {
 
         //check category value match
-        if(entry.category.toLowerCase( ) in categoryStates && entry.condition.toLowerCase() in conditionStates){
+        if(entry.category.toLowerCase() in categoryStates && entry.condition.toLowerCase() in conditionStates){
+            console.log("category and conditon match");
             if(isFree){
-                if(entry.price == "Free") filteredListings.appendChild(getListing(entry, true));
+                if(entry.price == "Free" || entry.price == "") filteredListings.appendChild(getListing(entry, true));
 
             } else {
                 if(parseFloat(entry.price) < parseFloat(price_lim)) filteredListings.appendChild(getListing(entry, true));
@@ -184,7 +194,7 @@ function filterListings(){
         
         }
     );
-
+    console.log(filteredListings);
     return filteredListings;
 }
 
