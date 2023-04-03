@@ -21,6 +21,7 @@ function userLoggedIn() {
 
 function updateNav() {
   var navbar = document.getElementsByClassName("navbar-nav")[0];
+  var navbarRight = document.getElementsByClassName("navbar-right")[0];
   var loginLogout = document.createElement("li");
   var loginLogoutLink = document.createElement("a");
   if (!userLoggedIn()) {
@@ -29,6 +30,9 @@ function updateNav() {
   }
   else {
     var dashboard = document.createElement("li");
+    if (location.href.includes("dashboard.html")) {
+      dashboard.classList.add("active");
+    }
     var dashboardLink = document.createElement("a");
     dashboardLink.href = "dashboard.html";
     dashboardLink.appendChild(document.createTextNode("Dashboard"));
@@ -38,7 +42,7 @@ function updateNav() {
     loginLogoutLink.appendChild(document.createTextNode("Log out"));
   }
   loginLogout.appendChild(loginLogoutLink);
-  navbar.appendChild(loginLogout);
+  navbarRight.appendChild(loginLogout);
 }
 
 
