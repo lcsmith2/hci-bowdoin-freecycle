@@ -149,13 +149,13 @@ function filterListings(){
         if(node.nodeName == "INPUT"){
             console.log(node.value);
             if(node.checked ){
-                categoryStates.push(node.value);
+                categoryStates.push(node.value.toLowerCase());
             }
         }
         
     }
     );
-    console.log(categoryStates);
+    console.log("Category states:",categoryStates);
     //by condition
     let conditionStates = new Array();
     let condition = document.getElementById("condition");
@@ -164,7 +164,7 @@ function filterListings(){
         if(node.nodeName == "INPUT"){
             console.log(node.value);
             if(node.checked ){
-                conditionStates.push(node.value);
+                conditionStates.push(node.value.toLowerCase());
             }
         }
     }
@@ -177,24 +177,21 @@ function filterListings(){
     let isFree = (price_lim == 0 || price_lim == null || price_lim == "") ? true : false;
 
 
-    var filteredListings;
+    let filteredListings = [];
     listingsData.forEach( function(entry) {
-
-        //check category value match
-        if(entry.category.toLowerCase() in categoryStates && entry.condition.toLowerCase() in conditionStates){
-            console.log("category and conditon match");
-            if(isFree){
-                if(entry.price == "Free" || entry.price == "") filteredListings.appendChild(getListing(entry, true));
-
-            } else {
-                if(parseFloat(entry.price) < parseFloat(price_lim)) filteredListings.appendChild(getListing(entry, true));
-            }
-            
+       
+        //check category , condition, price matches
+        if(categoryStates.indexOf(entry.category) != -1 &&
+        conditionStates.indexOf(entry.condition.toLowerCase()) != -1  &&
+        (entry.price == "Free" || parseFloat(entry.price) < price_lim || isFree)
+        ){
+            filteredListings.push(JSON.stringify(entry));
+           
         }
         
         }
     );
-    console.log(filteredListings);
+    
     return filteredListings;
 }
 
@@ -203,7 +200,6 @@ function displaySearchListings(terms) {
     //var data = JSON.parse(terms);
     console.log(terms);
     //var listingsData = JSON.parse(terms);
-    console.log("listings data", terms);
     console.log(terms.length);
     
     
