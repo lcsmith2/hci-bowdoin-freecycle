@@ -147,18 +147,6 @@ function performSearch(){
 
 
 }
-
-function openFilterPopup(){
-
-    
-    let filterButton = document.getElementById("filterbutton");
-    filterButton.setAttribute("data-toggle", "modal");
-    filterButton.setAttribute("data-target", "#filter-modal");
-    document.getElementById("filter-modal").setAttribute("aria-hidden", "false");
-    console.log("aria visible??");
-    
-     
-}
    
 function performFilter(){
     displayFilterListings(filterListings());

@@ -32,9 +32,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li id="main-button"><a href="index.html">Home</a><span class="sr-only">(current)</span></li>
-            <li id="flavor-button" class="active"><a href="#">Listings</a></li>
-            <li><a href="howitwork.html">How it Works</a></li>
             <li class="active"><a href="listings.html">Listings</a></li>
+            <li><a href="howitwork.html">How it Works</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right"></ul>
         </div>
@@ -50,7 +49,7 @@
 
       <input type = "text" id = "search">
       <button class = "button " id = "searchbutton" onclick = "performSearch()"><p>Search</p></button>
-      <button class = "button" id = "filterbutton" data-toggle="modal" data-target="filter-modal"onclick="openFilterPopup()" ><p>Filter</p></button>
+      <button class = "button" id = "filterbutton" data-toggle="modal" data-target="#filter-modal"><p>Filter</p></button>
 
     </div>
     
@@ -92,10 +91,8 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="listing-modal-label">Select Filters for Items</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" id="listing-modal-label">Select Filters for Items</h4>
         </div>
         <div class="modal-body">
           <form>
