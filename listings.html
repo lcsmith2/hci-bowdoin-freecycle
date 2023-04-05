@@ -11,6 +11,7 @@
   <!-- stylesheets-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="stylesheets/main.css" >
+  <link rel="stylesheet" href="stylesheets/listing.css" >
   
 </head>
 <body>
@@ -42,6 +43,17 @@
     <div class="title">
       <h1 class="text-center">Current Listings</h1>
     </div>
+
+    <div class = "searchbar">
+
+      <input type = "text" id = "search">
+      <button class = "button " id = "searchbutton" onclick = "performSearch()"><p>Search</p></button>
+      <button class = "button" id = "filterbutton" data-toggle="modal" data-target="filter-modal"onclick="openFilterPopup()" ><p>Filter</p></button>
+
+    </div>
+    
+    
+
     <div class="listings">
     </div>
   </div>
@@ -72,11 +84,72 @@
     </div>
   </div>
 
+
+  <!-- popup-->
+  <div class="modal fade" id="filter-modal" tabindex="-1" role="dialog" aria-labelledby="filter-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="listing-modal-label">Select Filters for Items</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <h3 class = "modal-title">Category</h3>
+              <div class="form-check" id = "category_check">
+                <input class="form-check-input" type="checkbox" id="check1" name="dorm" value="dorm">
+                <label class="form-check-label">Dorm</label>
+                <input class="form-check-input" type="checkbox" id="check2" name="school" value="school">
+                <label class="form-check-label">School</label>
+                <input class="form-check-input" type="checkbox" id="check3" name="kitchen" value="kitchen">
+                <label class="form-check-label">Kitchen</label>
+                <input class="form-check-input" type="checkbox" id="check4" name="furniture" value="furniture">
+                <label class="form-check-label">Furniture</label>
+                <input class="form-check-input" type="checkbox" id="check5" name="other" value="other">
+                <label class="form-check-label">Other</label>
+              </div>
+
+              <h3 class = "modal-title">Condition</h3>
+              <div class="form-check" id = "condition">
+                <input class="form-check-input" type="checkbox" id="cond1" name="poor" value="poor">
+                <label class="form-check-label">Poor</label>
+                <input class="form-check-input" type="checkbox" id="cond2" name="fair" value="fair">
+                <label class="form-check-label">Fair</label>
+                <input class="form-check-input" type="checkbox" id="cond3" name="good" value="good">
+                <label class="form-check-label">Good</label>
+                <input class="form-check-input" type="checkbox" id="cond4" name="likenew" value="like new">
+                <label class="form-check-label">Like New</label>
+              
+              </div>
+
+              <h3 class = "modal-title">Price</h3>
+              <label for="price_limit">Enter a maximum price (leave blank or put 0 for FREE):</label>
+              <input id = "price_limit" name = "price_limit" type="number" min= "0">
+              
+
+  
+            </div>
+
+          </form>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button id="filter_btn" type="button" class="btn btn-primary" onclick="performFilter()" >Filter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- bootstrap-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="js/main.js"></script>
-  <script src="js/listings.js"></script>
+  <script src="js/listings.js" defer></script>
   <script src="js/defaultListingsData.js"></script>
 </body>
 

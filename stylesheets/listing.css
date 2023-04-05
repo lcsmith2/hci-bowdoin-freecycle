@@ -1,0 +1,24 @@
+.searchbar{
+    width: 50%;
+    height: 2em;
+    margin: auto;   
+    display: flex;
+    flex-direction: row;
+  
+
+}
+
+.searchbar input {
+    width: 80%;
+    border: 1px solid pink;
+    border-radius: .5em;
+    
+    flex-grow: 2;
+}
+
+.searchbar .button {
+    
+    flex-grow: 1;
+    margin-left: 1em;
+    padding: 2px;
+}
