@@ -17,7 +17,7 @@ function handleDetails(buttonId) {
     modalBodyContent.firstChild.firstChild.nodeValue = listingData["name"];
     var descriptionLine = document.createElement("p");
     descriptionLine.appendChild(document.createTextNode("Description: "));
-    modalBodyContent.insertBefore(descriptionLine, modalBodyContent.childNodes[3]);
+    modalBodyContent.insertBefore(descriptionLine, modalBodyContent.childNodes[4]);
 
     var requestInfo = document.createElement("p");
     var req = listingData["requests"].length === 1 ? "request" : "requests";
@@ -94,7 +94,7 @@ function getListingInfo(listingData, shortenDescription) {
     listingInfo.appendChild(listingPrice);
 
     var listingCategory = document.createElement("p");
-    var category  = listingData["category"];
+    var category = `Category: ${listingData["category"]}`;
     listingCategory.appendChild(document.createTextNode(category));
     listingInfo.appendChild(listingCategory);
 
