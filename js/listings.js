@@ -279,6 +279,8 @@ function displaySearchListings(terms) {
 
 }
 
+
+
 function displayFilterListings(terms) {
     
     //var data = JSON.parse(terms);
