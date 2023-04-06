@@ -3,6 +3,61 @@ body {
    padding-bottom: 5vh;
 }
 
+.content {
+   position: relative;
+ }
+
+ img {
+   width: 100%;
+   height: 29em;
+   margin-bottom: 1.5em;
+ }
+ 
+/* .main-title {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100vh;
+   background-image: url("/assets/meadow-pine-trees.jpg");
+   background-size: cover;
+   opacity: 0.8;
+ }*/
+
+ .main-title h1{
+   display: block;
+  font-size: 4em;
+  margin-bottom: 0.3em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  color: green;
+  text-shadow: 2px 2px darkgreen;
+ }
+ 
+ .text-box {
+   position: absolute;
+   top: -30%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   z-index: 1;
+   text-align: center;
+   background-color: rgba(255, 255, 255, 0.7);
+   padding: 30px;
+ }
+ 
+ .text-box h2 {
+   font-size: 36px;
+   font-weight: bold;
+   color: #000;
+ }
+ 
+ .text-box p {
+   margin-top: 5%;
+   font-size: 18px;
+   color: #000;
+ } 
+
 .navbar {
    margin-bottom: 0;
 }
