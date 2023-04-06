@@ -206,6 +206,12 @@ h2 {
    font-size: 1.8rem;
 }
 
+footer {
+   margin-top: 50px;
+   font-size: 1.2em;
+   text-align: center;
+}
+
 @media screen and (max-width: 600px) {
    .listings {
       flex-direction: column;
