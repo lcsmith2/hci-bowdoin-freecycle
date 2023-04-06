@@ -65,8 +65,13 @@ color: #000;
 .listings, .requests {
    display: flex;
    flex-direction: row;
-   column-gap: 50px;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: center;
+   column-gap: 20px;
+   row-gap: 80px;
    padding: 2rem;
+   margin-top: 50px;
 }
 
 .listings img, .requests img {
@@ -74,18 +79,36 @@ color: #000;
    height: auto;
    max-width: 15vw;
    max-height: 15vw;
-   min-width: 150px;
-   min-height: 150px;
+   min-width: 180px;
+   min-height: 180px;
+   margin-bottom: 0;
 } 
 
+.listings h3,
+.listing-details h3 {
+   margin-top: 0;
+}
+
 .listing {
+   display: flex;
+   flex-direction: row;
+   align-items: center; 
+   justify-content: center;
+   column-gap: 20px;
+   width: 100%;
+   min-width: 200px;
+   max-width: 600px;
+}
+
+.listing-details {
    display: flex;
    flex-direction: row;
    align-items: center; 
    column-gap: 20px;
 }
 
-.listing p {
+.listing p,
+.listing-details p {
    font-size: 1.3em;   
 }
 
@@ -198,6 +221,7 @@ h2 {
    max-height: 30vw;
    min-width: 300px;
    min-height: 300px;
+   margin-bottom: 0;
 }
 
 .request-alert {
@@ -249,13 +273,26 @@ footer {
    .listing {
       flex-direction: column;
       align-items: center;
-      row-gap: 0;
-      column-gap: 20px;
+      row-gap: 20px;
+      column-gap: 0;
+      min-width: 100px;
+      max-width: 200px;
+   }
+
+   .listing img {
+      margin-bottom: 1rem;
    }
 
    .modal-body img {
       min-width: 200px;
       min-height: 200px;
+   }
+
+   .listing-details {
+      flex-direction: column;
+      align-items: center;
+      row-gap: 20px;
+      column-gap: 0;
    }
 
    .request-info {
