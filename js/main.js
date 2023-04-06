@@ -1,3 +1,5 @@
+
+
 $(document).ready(function() {
     // Add click event listener to all "Cancel" buttons
     $('.btn-primary').click(function() {
@@ -44,6 +46,7 @@ function updateNav() {
   loginLogout.appendChild(loginLogoutLink);
   navbarRight.appendChild(loginLogout);
 }
+
 
 
 document.addEventListener("DOMContentLoaded", function(event) {

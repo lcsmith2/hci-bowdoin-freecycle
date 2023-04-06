@@ -168,16 +168,52 @@ function displayFilterListings(terms) {
 
 function displayListings() {
 
-    var listingsData = getListingsData();
+    if(localStorage.categoryFiltered){
+        displayCategoryFilterListings(localStorage.getItem("categoryFiltered").toLowerCase());
+        localStorage.removeItem("categoryFiltered");
+    } else {
+        var listingsData = getListingsData();
 
-    var listingsDiv = document.getElementsByClassName("listings")[0];
-    listingsDiv.replaceChildren();
-    listingsData.forEach(function(listingData) {
-        listingsDiv.appendChild(getListing(listingData, true))
-    });
+        var listingsDiv = document.getElementsByClassName("listings")[0];
+        listingsDiv.replaceChildren();
+        listingsData.forEach(function(listingData) {
+            listingsDiv.appendChild(getListing(listingData, true))
+        });
+    }
+
+   
 }
   
 
+function displayCategoryFilterListings(category){
+    window.onload = function(){
+      console.log("category filter display");
+  
+      let listings = getListingsData();
+  
+      var listingsDiv = document.getElementsByClassName("listings")[0];
+      listingsDiv.replaceChildren();
+  
+      listings.forEach(function(entry) {
+          if(entry.category.toLowerCase() == category.toLowerCase()){
+              listingsDiv.appendChild(getListing(entry, true))
+          }
+          
+      });
+  
+    let listings_div_length = Object.keys(listingsDiv).length;
+      if(listings_div_length == 0){
+          let h1 = document.createElement("h1");
+          let txt = document.createTextNode("Sorry, no items currently in this category.");
+          h1.appendChild(txt);
+          listingsDiv.appendChild(h1);
+      }
+     }
+    
+  
+  
+  
+  }
 
 document.addEventListener("DOMContentLoaded", function(event) {
     displayListings();
