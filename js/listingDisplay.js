@@ -194,23 +194,30 @@ function displayCategoryFilterListings(category){
       var listingsDiv = document.getElementsByClassName("listings")[0];
       listingsDiv.replaceChildren();
   
+     
+      let addedListing = false;
+
       listings.forEach(function(entry) {
-          if(entry.category.toLowerCase() == category.toLowerCase()){
-              listingsDiv.appendChild(getListing(entry, true))
-          }
-          
-      });
+        if(entry.category.toLowerCase() == category.toLowerCase()){
+            addedListing = true;
+            listingsDiv.appendChild(getListing(entry, true))
+        }
+        
+     });
+    
+      if(!addedListing){
+        let h1 = document.createElement("h1");
+        let txt = document.createTextNode("Sorry, no items currently in this category.");
+        h1.appendChild(txt);
+        listingsDiv.appendChild(h1);
+
+    } 
+      
   
-    let listings_div_length = Object.keys(listingsDiv).length;
-      if(listings_div_length == 0){
-          let h1 = document.createElement("h1");
-          let txt = document.createTextNode("Sorry, no items currently in this category.");
-          h1.appendChild(txt);
-          listingsDiv.appendChild(h1);
-      }
+   
+      
      }
     
-  
   
   
   }
