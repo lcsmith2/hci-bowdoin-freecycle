@@ -222,6 +222,7 @@ function displayCategoryFilterListings(category){
   
   }
 
+  
 document.addEventListener("DOMContentLoaded", function(event) {
     displayListings();
 });
