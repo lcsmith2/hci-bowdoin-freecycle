@@ -7,6 +7,17 @@ function displayWelcome(){
     document.getElementById("welcomeMessage").innerHTML = "Welcome back " + localStorage.user + " !";
 }
 
+function displayRequests(){
+    var listingsData = getListingsData();
+
+    var listingsDiv = document.getElementsByClassName("requests")[0];
+    listingsDiv.replaceChildren();
+    listingsData.forEach(function(listingData) {
+        listingsDiv.appendChild(getListing(listingData, true))
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function(event) {
     displayWelcome();
+    displayRequests();
 });
