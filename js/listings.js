@@ -115,7 +115,7 @@ function getListingInfo(listingData, shortenDescription) {
     return listingInfo;
 }
 
-function getListing(listingData, shortenDescription) {
+function getListing(listingData, shortenDescription, buttonName="Details") {
     var listing = document.createElement("div");
     listing.classList.add("listing");
 
@@ -132,7 +132,7 @@ function getListing(listingData, shortenDescription) {
     listingButton.onclick = function() {
         handleDetails(listingButton.id)
     };
-    listingButton.appendChild(document.createTextNode("Details"));
+    listingButton.appendChild(document.createTextNode(buttonName));
     listingInfo.appendChild(listingButton);
 
     listing.appendChild(listingInfo);

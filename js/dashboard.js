@@ -13,7 +13,7 @@ function displayRequests(){
     var listingsDiv = document.getElementsByClassName("requests")[0];
     listingsDiv.replaceChildren();
     listingsData.forEach(function(listingData) {
-        listingsDiv.appendChild(getListing(listingData, true))
+        listingsDiv.appendChild(getListing(listingData, true, "Cancel"))
     });
 }
 
