@@ -95,7 +95,8 @@ function getListingInfo(listingData, shortenDescription) {
     listingInfo.appendChild(listingPrice);
 
     var listingCategory = document.createElement("p");
-    var category = `Category: ${listingData["category"]}`;
+    var cat = listingData["category"];
+    var category = `Category: ${cat[0].toUpperCase() + cat.slice(1)}`;
     listingCategory.appendChild(document.createTextNode(category));
     listingInfo.appendChild(listingCategory);
 
