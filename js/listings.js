@@ -1,7 +1,7 @@
 const DESCRIPTION_LEN = 50;
 
 function handleDetails(buttonId) {
-    var listingId = buttonId.split("-")[1];
+    var listingId = buttonId.split("-").pop();
 
     var listingsData = getListingsData();
     var listingData = listingsData.find(function(listing) {
@@ -40,7 +40,7 @@ function addRequest(listingsData, listingIndex) {
 }
 
 function handleRequest(buttonId) {
-    var listingId = buttonId.split("-")[1];
+    var listingId = buttonId.split("-").pop();
     var alerts = document.getElementsByClassName("request-alert");
     // User isn't logged in
     if (localStorage.user === undefined || localStorage.user === null) {
@@ -115,12 +115,24 @@ function getListingInfo(listingData, shortenDescription) {
     return listingInfo;
 }
 
-function getListing(listingData, shortenDescription, buttonName="Details") {
+function getListing(listingData, shortenDescription, imageButton, buttonName="Details") {
     var listing = document.createElement("div");
     listing.classList.add("listing");
 
     var listingImage = getListingImage(listingData);
-    listing.appendChild(document.createElement("div").appendChild(listingImage));
+    if (!imageButton) {
+        listing.appendChild(document.createElement("div").appendChild(listingImage));
+    }
+    else {
+        listingImage.classList.add("img-btn");
+        listingImage.id = "listing-img-" + listingData["id"];
+        listingImage.setAttribute("data-toggle", "modal");
+        listingImage.setAttribute("data-target", "#listing-modal");
+        listingImage.onclick = function() {
+            handleDetails(listingImage.id)
+        };
+        listing.appendChild(document.createElement("div").appendChild(listingImage));
+    }
     
     var listingInfo = getListingInfo(listingData, shortenDescription);
 

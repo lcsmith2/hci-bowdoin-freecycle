@@ -13,13 +13,14 @@ img {
    margin-bottom: 1.5em;
 }
  
-a:link, a:visited {
+.homecategories a:link,
+.homecategories a:visited {
    color: black;
    text-align: center;
    text-decoration: none;
 }
 
-a:hover {
+.homecategories a:hover {
    color: gray;
    text-align: center;
    text-decoration: none;
@@ -114,6 +115,15 @@ color: #000;
 .listing p,
 .listing-details p {
    font-size: 1.3em;   
+}
+
+.listing-full {
+   min-width: 550px;
+   max-width: unset;
+}
+
+.img-btn {
+   cursor: pointer;
 }
 
 .title {
@@ -297,6 +307,11 @@ footer {
       align-items: center;
       row-gap: 20px;
       column-gap: 0;
+   }
+
+   .listing-full {
+      min-width: 300px;
+      max-width: unset;
    }
 
    .request-info {
