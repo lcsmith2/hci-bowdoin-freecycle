@@ -116,6 +116,11 @@ color: #000;
    font-size: 1.3em;   
 }
 
+.listing-full {
+   min-width: 550px;
+   max-width: unset;
+}
+
 .title {
    padding-top: 1rem;
    padding-bottom: 1.5rem;
@@ -297,6 +302,11 @@ footer {
       align-items: center;
       row-gap: 20px;
       column-gap: 0;
+   }
+
+   .listing-full {
+      min-width: 300px;
+      max-width: unset;
    }
 
    .request-info {
