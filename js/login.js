@@ -8,9 +8,7 @@ function saveUser(){
         return;
     }
     location.href = "dashboard.html";
-    console.log("CLICKED");
     localStorage.user = userName;
-    console.log(localStorage.user);
 }
 
 

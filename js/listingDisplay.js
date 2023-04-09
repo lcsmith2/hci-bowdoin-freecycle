@@ -1,6 +1,5 @@
 function performSearch(){
     var searchQuery = document.getElementById("search").value;
-    console.log(searchQuery);
 
     var filteredListings = searchListings(searchQuery);
     displaySearchListings(filteredListings);
@@ -11,9 +10,6 @@ function performSearch(){
 function performFilter(){
     displayFilterListings(filterListings());
 }
-    
-
-
 
 function searchListings(searchString){
     searchString = searchString.toLowerCase(); 
@@ -30,26 +26,15 @@ function searchListings(searchString){
         //caseless matching
         var matchName = entry["name"].toLowerCase().search(searchString);
         var matchDescription = entry["description"].toLowerCase().search(searchString);
-        console.log(entry["name"]);
         
-        if(matchName != -1 || matchDescription != -1){
-            //filteredListings.appendChild(searched);
-            console.log("Match!");
-            console.log(entry);
-            console.log("parse", JSON.stringify(entry));
-           
+        if (matchName != -1 || matchDescription != -1){          
             listingsObj.push(JSON.stringify(entry));
-            
-            // filtered= JSON.parse(filteredListings);
-            // filteredListings.appendChild(JSON.stringify(entry));
            
         }
     }
     );
 
-    console.log(JSON.stringify(listingsObj));
     return listingsObj;
-
 }
 
 function filterListings(){
@@ -66,7 +51,6 @@ function filterListings(){
     const category_children = catInfo.childNodes;
     category_children.forEach(function(node) {
         if(node.nodeName == "INPUT"){
-            console.log(node.value);
             if(node.checked ){
                 categoryStates.push(node.value.toLowerCase());
             }
@@ -74,27 +58,24 @@ function filterListings(){
         
     }
     );
-    console.log("Category states:",categoryStates);
+
     //by condition
     let conditionStates = new Array();
     let condition = document.getElementById("condition");
     const condition_children = condition.childNodes;
     condition_children.forEach(function(node) {
         if(node.nodeName == "INPUT"){
-            console.log(node.value);
             if(node.checked ){
                 conditionStates.push(node.value.toLowerCase());
             }
         }
     }
     );
-    console.log(conditionStates);
+
     //price
     let price_limit = document.getElementById("price_limit");
-    console.log("price, ",price_limit.value);
     let price_lim = price_limit.value;
     let isFree = (price_lim == 0 || price_lim == null || price_lim == "") ? true : false;
-
 
     let filteredListings = [];
     listingsData.forEach( function(entry) {
@@ -116,12 +97,6 @@ function filterListings(){
 
 function displaySearchListings(terms) {
     
-    //var data = JSON.parse(terms);
-    console.log(terms);
-    //var listingsData = JSON.parse(terms);
-    console.log(terms.length);
-    
-    
     var listingsDiv = document.getElementsByClassName("listings")[0];
     listingsDiv.replaceChildren();
     if(terms.length == 0){
@@ -136,18 +111,10 @@ function displaySearchListings(terms) {
         listingsDiv.appendChild(getListing(listingData, true, true))
     });
 
-
 }
 
 function displayFilterListings(terms) {
-    
-    //var data = JSON.parse(terms);
-    console.log(terms);
-    //var listingsData = JSON.parse(terms);
-    console.log("filtered listing data data", terms);
-    console.log(terms.length);
-    
-    
+       
     var listingsDiv = document.getElementsByClassName("listings")[0];
     listingsDiv.replaceChildren();
     if(terms.length == 0){
@@ -161,7 +128,6 @@ function displayFilterListings(terms) {
         listingData = JSON.parse(listingData);
         listingsDiv.appendChild(getListing(listingData, true, true))
     });
-
 
 }
 
@@ -180,14 +146,12 @@ function displayListings() {
             listingsDiv.appendChild(getListing(listingData, true, true))
         });
     }
-
    
 }
   
 
 function displayCategoryFilterListings(category){
     window.onload = function(){
-      console.log("category filter display");
   
       let listings = getListingsData();
   
@@ -203,7 +167,7 @@ function displayCategoryFilterListings(category){
             listingsDiv.appendChild(getListing(entry, true, true))
         }
         
-     });
+        });
     
       if(!addedListing){
         let h1 = document.createElement("h1");
@@ -211,16 +175,9 @@ function displayCategoryFilterListings(category){
         h1.appendChild(txt);
         listingsDiv.appendChild(h1);
 
-    } 
-      
-  
-   
-      
-     }
-    
-  
-  
-  }
+        } 
+    }
+}
 
   
 document.addEventListener("DOMContentLoaded", function(event) {
