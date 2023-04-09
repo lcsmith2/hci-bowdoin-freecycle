@@ -13,13 +13,14 @@ img {
    margin-bottom: 1.5em;
 }
  
-a:link, a:visited {
+.homecategories a:link,
+.homecategories a:visited {
    color: black;
    text-align: center;
    text-decoration: none;
 }
 
-a:hover {
+.homecategories a:hover {
    color: gray;
    text-align: center;
    text-decoration: none;
@@ -119,6 +120,10 @@ color: #000;
 .listing-full {
    min-width: 550px;
    max-width: unset;
+}
+
+.img-btn {
+   cursor: pointer;
 }
 
 .title {

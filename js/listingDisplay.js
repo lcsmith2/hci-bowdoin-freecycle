@@ -133,7 +133,7 @@ function displaySearchListings(terms) {
 
     terms.forEach(function(listingData) {
         listingData = JSON.parse(listingData);
-        listingsDiv.appendChild(getListing(listingData, true))
+        listingsDiv.appendChild(getListing(listingData, true, true))
     });
 
 
@@ -159,7 +159,7 @@ function displayFilterListings(terms) {
 
     terms.forEach(function(listingData) {
         listingData = JSON.parse(listingData);
-        listingsDiv.appendChild(getListing(listingData, true))
+        listingsDiv.appendChild(getListing(listingData, true, true))
     });
 
 
@@ -177,7 +177,7 @@ function displayListings() {
         var listingsDiv = document.getElementsByClassName("listings")[0];
         listingsDiv.replaceChildren();
         listingsData.forEach(function(listingData) {
-            listingsDiv.appendChild(getListing(listingData, true))
+            listingsDiv.appendChild(getListing(listingData, true, true))
         });
     }
 
@@ -200,7 +200,7 @@ function displayCategoryFilterListings(category){
       listings.forEach(function(entry) {
         if(entry.category.toLowerCase() == category.toLowerCase()){
             addedListing = true;
-            listingsDiv.appendChild(getListing(entry, true))
+            listingsDiv.appendChild(getListing(entry, true, true))
         }
         
      });
