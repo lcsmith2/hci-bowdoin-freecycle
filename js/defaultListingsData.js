@@ -200,7 +200,7 @@ var defaultListingsData = [
         id: "14",
         user: "user3",
         name: "Cutlery set",
-        image: "./assets/cutlery.jpg",
+        image: "./assets/cutlery.jpeg",
         amount: "1",
         category: "kitchen",
         condition: "Fair",
