@@ -9,6 +9,7 @@ function performSearch(){
    
 function performFilter(){
     displayFilterListings(filterListings());
+    console.log(getFilterList())
 }
 
 function searchListings(searchString){
@@ -183,3 +184,27 @@ function displayCategoryFilterListings(category){
 document.addEventListener("DOMContentLoaded", function(event) {
     displayListings();
 });
+
+function getFilterList() {
+    let filterList = [];
+
+    // get selected categories
+    let categoryCheck = document.querySelectorAll("#category_check input[type=checkbox]:checked");
+    categoryCheck.forEach(function (checkbox) {
+        filterList.push(checkbox.value);
+    });
+
+    // get selected conditions
+    let conditionCheck = document.querySelectorAll("#condition input[type=checkbox]:checked");
+    conditionCheck.forEach(function (checkbox) {
+        filterList.push(checkbox.value);
+    });
+
+    // get price limit
+    let priceLimit = document.getElementById("price_limit").value;
+    if (priceLimit != "") {
+        filterList.push("Price: " + priceLimit);
+    }
+
+    return filterList;
+}
