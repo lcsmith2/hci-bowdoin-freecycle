@@ -10,6 +10,10 @@ function performSearch(){
 function performFilter(){
     displayFilterListings(filterListings());
     console.log(getFilterList())
+
+    // display filter list
+  let filterListHtml = getFilterList();
+  document.getElementById("filter-list").innerHTML = filterListHtml;
 }
 
 function searchListings(searchString){
@@ -206,5 +210,16 @@ function getFilterList() {
         filterList.push("Price: " + priceLimit);
     }
 
-    return filterList;
+    let filterListHtml = document.createElement("ul");
+    filterList.forEach(function(filter) {
+    let filterItemHtml = document.createElement("li");
+    let filterTextHtml = document.createTextNode(filter);
+    filterItemHtml.appendChild(filterTextHtml);
+    filterListHtml.appendChild(filterItemHtml);
+  });
+
+  // return HTML list of filters
+  return filterListHtml.outerHTML;
+
+    //return filterList;
 }
