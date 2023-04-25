@@ -12,8 +12,15 @@ function performFilter(){
     console.log(getFilterList())
 
     // display filter list
-  let filterListHtml = getFilterList();
-  document.getElementById("filter-list").innerHTML = filterListHtml;
+  let filterDictHtml = getFilterList();
+
+  //FIGURE OUT HOW TO PRINT EACH KEY, VALUE PAIR AFTER GETTING THE DICTIONARY
+  filterDictHtml.Category.forEach(function(category) {
+    document.getElementById("filter-list").appendChild(category);
+   })
+  //document.getElementById("filter-list").innerHTML = filterListHtml;
+
+
 }
 
 function searchListings(searchString){
@@ -190,25 +197,40 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 function getFilterList() {
-    let filterList = [];
+
+    let filterDict = {
+        Category: [],
+        Condition: [],
+        Price: [],
+        };
+
+    //let filterList = [];
 
     // get selected categories
     let categoryCheck = document.querySelectorAll("#category_check input[type=checkbox]:checked");
     categoryCheck.forEach(function (checkbox) {
-        filterList.push(checkbox.value);
+        filterDict["Category"].push(checkbox.value);
     });
 
     // get selected conditions
     let conditionCheck = document.querySelectorAll("#condition input[type=checkbox]:checked");
     conditionCheck.forEach(function (checkbox) {
-        filterList.push(checkbox.value);
+        filterDict["Condition"].push(checkbox.value);
     });
 
     // get price limit
     let priceLimit = document.getElementById("price_limit").value;
     if (priceLimit != "") {
-        filterList.push("Price: " + priceLimit);
+        filterDict["Price"].push("Price: " + priceLimit);
     }
+
+    
+    let filterListHtml = document.createElement("ul");
+
+
+    for(var key in filterDict) {
+        var filterList = filterDict[key];
+        console.log(filterList)
 
     let filterListHtml = document.createElement("ul");
     filterList.forEach(function(filter) {
@@ -216,10 +238,13 @@ function getFilterList() {
     let filterTextHtml = document.createTextNode(filter);
     filterItemHtml.appendChild(filterTextHtml);
     filterListHtml.appendChild(filterItemHtml);
+    console.log(filterListHtml.outerHTML)
   });
+}
 
   // return HTML list of filters
-  return filterListHtml.outerHTML;
+  //return filterListHtml.outerHTML;
 
-    //return filterList;
+return filterDict;
 }
+
