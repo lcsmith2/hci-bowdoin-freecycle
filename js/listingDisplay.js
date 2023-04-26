@@ -26,8 +26,15 @@ function performFilter(){
 //   all_state_text.parentNode.remove(all_state_text);
 
   //FIGURE OUT HOW TO PRINT EACH KEY, VALUE PAIR AFTER GETTING THE DICTIONARY
+
+  var space = document.createElement('p');
+
+
   var z = document.createElement('p');
-   z.innerHTML = "Category: ";
+  z.classList.add("filter-status");
+  if (filterDictHtml.category.length > 0) {
+    z.innerHTML = "Category: ";
+  }
    document.getElementById("filter-list").appendChild(z);
   filterDictHtml.category.forEach(function(category) {
     console.log("category", category);
@@ -35,6 +42,35 @@ function performFilter(){
     z.setAttribute("class", "filtered-state");
     z.innerHTML = category;
     document.getElementById("filter-list").appendChild(z);
+   })
+  ;
+
+   var y = document.createElement('p');
+   y.classList.add("filter-status");
+   if (filterDictHtml.condition.length > 0) {
+    y.innerHTML = "Condition: ";
+   }
+   document.getElementById("filter-list").appendChild(y);
+  filterDictHtml.condition.forEach(function(condition) {
+    console.log("condition", condition);
+    var y = document.createElement('div');
+    y.setAttribute("class", "filtered-state");
+    y.innerHTML = condition;
+    document.getElementById("filter-list").appendChild(y);
+   });
+
+   var x = document.createElement('p');
+   x.classList.add("filter-status");
+   if (filterDictHtml.price.length > 0) {
+    x.innerHTML = "Price Limit: ";
+   }
+   document.getElementById("filter-list").appendChild(x);
+  filterDictHtml.price.forEach(function(price) {
+    console.log("price", price);
+    var x = document.createElement('div');
+    x.setAttribute("class", "filtered-state");
+    x.innerHTML = "$" + price.split(" ")[1];
+    document.getElementById("filter-list").appendChild(x);
    });
    
   //document.getElementById("filter-list").innerHTML = filterListHtml;
@@ -112,8 +148,8 @@ function filterListings(){
     listingsData.forEach( function(entry) {
        
         //check category , condition, price matches
-        if(categoryStates.indexOf(entry.category) != -1 &&
-        conditionStates.indexOf(entry.condition.toLowerCase()) != -1  &&
+        if ((categoryStates.indexOf(entry.category) != -1 || categoryStates.length == 0) &&
+        (conditionStates.indexOf(entry.condition.toLowerCase()) != -1 || conditionStates.length == 0) &&
         (entry.price == "Free" || parseFloat(entry.price) < price_lim || isFree)
         ){
             filteredListings.push(JSON.stringify(entry));
@@ -266,4 +302,3 @@ function getFilterList() {
 
 return filterDict;
 }
-
