@@ -268,6 +268,10 @@ footer {
    flex-direction: row;
 }
 
+.filter-status {
+   padding-left: 1rem;
+}
+
 @media screen and (max-width: 600px) {
    .listings {
       flex-direction: column;
@@ -333,4 +337,19 @@ footer {
       flex-direction: column;
    }
 
+}
+
+.filtered-state{
+   color: black;
+   display:inline-block;
+   padding: 5px;
+   margin-left: 10px;
+   background-color: lightgrey;
+   border-radius: 5px;
+
+}
+
+#filter-list > p{
+
+   display: inline-block;
 }
