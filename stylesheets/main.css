@@ -262,6 +262,10 @@ footer {
    justify-content: center;
 }
 
+.filter-status {
+   padding-left: 1rem;
+}
+
 @media screen and (max-width: 600px) {
    .listings {
       flex-direction: column;

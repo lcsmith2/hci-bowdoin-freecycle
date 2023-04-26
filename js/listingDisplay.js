@@ -31,7 +31,10 @@ function performFilter(){
 
 
   var z = document.createElement('p');
-   z.innerHTML = "Category: ";
+  z.classList.add("filter-status");
+  if (filterDictHtml.category.length > 0) {
+    z.innerHTML = "Category: ";
+  }
    document.getElementById("filter-list").appendChild(z);
   filterDictHtml.category.forEach(function(category) {
     console.log("category", category);
@@ -43,7 +46,10 @@ function performFilter(){
   ;
 
    var y = document.createElement('p');
-   y.innerHTML = "Condition: ";
+   y.classList.add("filter-status");
+   if (filterDictHtml.condition.length > 0) {
+    y.innerHTML = "Condition: ";
+   }
    document.getElementById("filter-list").appendChild(y);
   filterDictHtml.condition.forEach(function(condition) {
     console.log("condition", condition);
@@ -54,13 +60,16 @@ function performFilter(){
    });
 
    var x = document.createElement('p');
-   x.innerHTML = "Price Limit: ";
+   x.classList.add("filter-status");
+   if (filterDictHtml.price.length > 0) {
+    x.innerHTML = "Price Limit: ";
+   }
    document.getElementById("filter-list").appendChild(x);
   filterDictHtml.price.forEach(function(price) {
     console.log("price", price);
     var x = document.createElement('div');
     x.setAttribute("class", "filtered-state");
-    x.innerHTML = price;
+    x.innerHTML = "$" + price.split(" ")[1];
     document.getElementById("filter-list").appendChild(x);
    });
    
