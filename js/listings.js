@@ -150,6 +150,22 @@ function performSearch(){
    
 function performFilter(){
     displayFilterListings(filterListings());
+
+    let filters = [];
+    
+    if (document.getElementById("check1").checked) {
+      filters.push("category");
+    }
+    
+    if (document.getElementById("check2").checked) {
+      filters.push("condition");
+    }
+    
+    if (document.getElementById("check3").checked) {
+      filters.push("price");
+    }
+
+    return filters;
 }
     
 
@@ -303,6 +319,4 @@ function displayFilterListings(terms) {
         listingData = JSON.parse(listingData);
         listingsDiv.appendChild(getListing(listingData, true))
     });
-
-
 }
