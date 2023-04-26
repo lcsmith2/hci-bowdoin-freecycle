@@ -324,3 +324,18 @@ footer {
    }
 
 }
+
+.filtered-state{
+   color: black;
+   display:inline-block;
+   padding: 5px;
+   margin-left: 10px;
+   background-color: lightgrey;
+   border-radius: 5px;
+
+}
+
+#filter-list > p{
+
+   display: inline-block;
+}
