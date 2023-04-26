@@ -8,16 +8,35 @@ function performSearch(){
 }
    
 function performFilter(){
+
     displayFilterListings(filterListings());
     console.log(getFilterList())
 
     // display filter list
   let filterDictHtml = getFilterList();
+  //clear old filters
+    let fil_list = document.getElementById("filter-list");
+    while(fil_list.hasChildNodes()){
+        fil_list.firstChild.remove();
+    }
+//   var all_state_text = document.getElementsByClassName('filtered-state');
+//   while(all_state_text.length > 0){
+//     all_state_text[0].parentNode.removeChild(all_state_text[0]);
+//   }
+//   all_state_text.parentNode.remove(all_state_text);
 
   //FIGURE OUT HOW TO PRINT EACH KEY, VALUE PAIR AFTER GETTING THE DICTIONARY
-  filterDictHtml.Category.forEach(function(category) {
-    document.getElementById("filter-list").appendChild(category);
-   })
+  var z = document.createElement('p');
+   z.innerHTML = "Category: ";
+   document.getElementById("filter-list").appendChild(z);
+  filterDictHtml.category.forEach(function(category) {
+    console.log("category", category);
+    var z = document.createElement('div');
+    z.setAttribute("class", "filtered-state");
+    z.innerHTML = category;
+    document.getElementById("filter-list").appendChild(z);
+   });
+   
   //document.getElementById("filter-list").innerHTML = filterListHtml;
 
 
@@ -58,7 +77,7 @@ function filterListings(){
     //get filter info
 
     //by category
-    let categoryStates = new Array();
+    let categoryStates = [];
     let catInfo = document.getElementById("category_check");
     const category_children = catInfo.childNodes;
     category_children.forEach(function(node) {
@@ -72,7 +91,7 @@ function filterListings(){
     );
 
     //by condition
-    let conditionStates = new Array();
+    let conditionStates = [];
     let condition = document.getElementById("condition");
     const condition_children = condition.childNodes;
     condition_children.forEach(function(node) {
@@ -199,9 +218,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function getFilterList() {
 
     let filterDict = {
-        Category: [],
-        Condition: [],
-        Price: [],
+        "category": [],
+        "condition": [],
+        "price": [],
         };
 
     //let filterList = [];
@@ -209,19 +228,19 @@ function getFilterList() {
     // get selected categories
     let categoryCheck = document.querySelectorAll("#category_check input[type=checkbox]:checked");
     categoryCheck.forEach(function (checkbox) {
-        filterDict["Category"].push(checkbox.value);
+        filterDict["category"].push(checkbox.value);
     });
 
     // get selected conditions
     let conditionCheck = document.querySelectorAll("#condition input[type=checkbox]:checked");
     conditionCheck.forEach(function (checkbox) {
-        filterDict["Condition"].push(checkbox.value);
+        filterDict["condition"].push(checkbox.value);
     });
 
     // get price limit
     let priceLimit = document.getElementById("price_limit").value;
     if (priceLimit != "") {
-        filterDict["Price"].push("Price: " + priceLimit);
+        filterDict["price"].push("Price: " + priceLimit.toString());
     }
 
     
@@ -232,9 +251,9 @@ function getFilterList() {
         var filterList = filterDict[key];
         console.log(filterList)
 
-    let filterListHtml = document.createElement("ul");
+    let filterListHtml = document.createElement("p");
     filterList.forEach(function(filter) {
-    let filterItemHtml = document.createElement("li");
+    let filterItemHtml = document.createElement("div");
     let filterTextHtml = document.createTextNode(filter);
     filterItemHtml.appendChild(filterTextHtml);
     filterListHtml.appendChild(filterItemHtml);
