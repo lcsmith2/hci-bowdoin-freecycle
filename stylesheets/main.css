@@ -262,6 +262,12 @@ footer {
    justify-content: center;
 }
 
+.container {
+   column-width: 10em;
+   display: flex;
+   flex-direction: row;
+}
+
 @media screen and (max-width: 600px) {
    .listings {
       flex-direction: column;
@@ -321,6 +327,10 @@ footer {
       align-items: center;
       vertical-align: top;
       text-align: center;
+   }
+
+   .container {
+      flex-direction: column;
    }
 
 }
