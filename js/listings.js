@@ -1,6 +1,25 @@
 const DESCRIPTION_LEN = 50;
 
-function handleDetails(buttonId) {
+function setOnClick(listingId, actions) {
+    actions.forEach(function(action) {
+        var button = document.getElementsByClassName(action + "-btn")[0];
+        button.id = action + "-" + listingId;
+        switch(action) {
+            case "request":
+                button.onclick = function() {
+                    handleRequest(button.id)
+                };
+                break;
+            case "cancel":
+                button.onclick = function() {
+                    handleCancel(button.id)
+                };
+                break;
+        }
+    });
+}
+
+function handleDetails(buttonId, actions) {
     var listingId = buttonId.split("-").pop();
 
     var listingsData = getListingsData();
@@ -25,11 +44,7 @@ function handleDetails(buttonId) {
     requestInfo.appendChild(document.createTextNode(requestInfoText));
     modalBodyContent.appendChild(requestInfo);
 
-    var requestButton = document.getElementsByClassName("request-btn")[0];
-    requestButton.id = "request-" + listingId;
-    requestButton.onclick = function() {
-        handleRequest(requestButton.id)
-    };
+    setOnClick(listingId, actions);
 }
 
 function addRequest(listingsData, listingIndex) {
@@ -66,6 +81,11 @@ function handleRequest(buttonId) {
     }
     localStorage.removeItem("toRequest");
     addRequest(listingsData, listingIndex);
+}
+
+function handleCancel(buttonId) {
+    var listingId = buttonId.split("-").pop();
+    console.log(buttonId);
 }
 
 function hideRequestAlerts() {
@@ -117,7 +137,7 @@ function getListingInfo(listingData, shortenDescription) {
     return listingInfo;
 }
 
-function getListing(listingData, shortenDescription, imageButton, buttonName="Details") {
+function getListing(listingData, shortenDescription, imageButton, actions) {
     var listing = document.createElement("div");
     listing.classList.add("listing");
 
@@ -131,7 +151,7 @@ function getListing(listingData, shortenDescription, imageButton, buttonName="De
         listingImage.setAttribute("data-toggle", "modal");
         listingImage.setAttribute("data-target", "#listing-modal");
         listingImage.onclick = function() {
-            handleDetails(listingImage.id)
+            handleDetails(listingImage.id, actions)
         };
         listing.appendChild(document.createElement("div").appendChild(listingImage));
     }
@@ -144,9 +164,9 @@ function getListing(listingData, shortenDescription, imageButton, buttonName="De
     listingButton.setAttribute("data-toggle", "modal");
     listingButton.setAttribute("data-target", "#listing-modal");
     listingButton.onclick = function() {
-        handleDetails(listingButton.id)
+        handleDetails(listingButton.id, actions)
     };
-    listingButton.appendChild(document.createTextNode(buttonName));
+    listingButton.appendChild(document.createTextNode("Details"));
     listingInfo.appendChild(listingButton);
 
     listing.appendChild(listingInfo);

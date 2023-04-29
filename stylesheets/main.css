@@ -87,6 +87,7 @@ color: #000;
 } 
 
 .listings h3,
+.requests h3,
 .listing-details h3 {
    margin-top: 0;
 }

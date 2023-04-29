@@ -11,7 +11,10 @@ function displayRequests(){
     listingsDiv.replaceChildren();
     for (var i = 0; i < listingsData.length; i++) {
         if (userRequestedItem(listingsData[i])){
-            listingsDiv.appendChild(getListing(listingsData[i], true, true, "Cancel"));
+            var listing = getListing(listingsData[i], true, true, ["cancel"]);
+            var desc = listing.getElementsByClassName("listing-desc")[0];
+            desc.parentNode.removeChild(desc);
+            listingsDiv.appendChild(listing);
         }
     }
 }
