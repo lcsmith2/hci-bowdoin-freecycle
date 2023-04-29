@@ -83,13 +83,24 @@ function handleRequest(buttonId) {
     addRequest(listingsData, listingIndex);
 }
 
-function handleCancel(buttonId) {
-    var listingId = buttonId.split("-").pop();
-    console.log(buttonId);
+function cancelRequest(listingId) {
+    console.log(listingId);
 }
 
-function hideRequestAlerts() {
-    var alerts = Array.from(document.getElementsByClassName("request-alert"));
+function handleCancel(buttonId) {
+    var listingId = buttonId.split("-")[1];
+    var modalButtons = document.getElementsByClassName("footer-btns")[0];
+    modalButtons.classList.add("hidden");
+    var confirmAlert = document.getElementsByClassName("cancel-alert")[0];
+    confirmAlert.classList.remove("hidden");
+    var confirmButton = document.getElementsByClassName("confirm-btn")[0];
+    confirmButton.onclick = function() {
+        cancelRequest(listingId)
+    }
+}
+
+function hideAlerts() {
+    var alerts = Array.from(document.getElementsByClassName("alert"));
     alerts.forEach(function(alert) {
         alert.classList.add("hidden")
     });
@@ -172,4 +183,12 @@ function getListing(listingData, shortenDescription, imageButton, actions) {
     listing.appendChild(listingInfo);
     return listing;
 }
+
+$(("#listing-modal")).on("hidden.bs.modal", function() {
+    hideAlerts()
+    var modalButtons = document.getElementsByClassName("footer-btns");
+    if (modalButtons.length > 0) {
+        modalButtons[0].classList.remove("hidden");
+    }
+});
  

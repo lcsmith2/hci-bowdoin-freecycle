@@ -29,6 +29,13 @@ function userRequestedItem(listing){
     return request;
 }
 
+function dismissConfirm() {
+    var modalButtons = document.getElementsByClassName("footer-btns")[0];
+    modalButtons.classList.remove("hidden");
+    var confirmAlert = document.getElementsByClassName("cancel-alert")[0];
+    confirmAlert.classList.add("hidden");
+}
+
 document.addEventListener("DOMContentLoaded", function(event) {
     displayWelcome();
     displayRequests();

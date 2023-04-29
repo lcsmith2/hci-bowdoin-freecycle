@@ -230,6 +230,12 @@ h2 {
    font-size: 1.8rem;
 }
 
+.cancel-alert {
+   background-color: rgb(255, 240, 195);
+   text-align: center;
+   font-size: 1.8rem;
+}
+
 footer {
    margin-top: 50px;
    font-size: 1.2em;
