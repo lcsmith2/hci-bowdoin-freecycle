@@ -45,6 +45,7 @@ function handleRequest(buttonId) {
     // User isn't logged in
     if (localStorage.user === undefined || localStorage.user === null) {
         alerts[0].classList.remove("hidden");
+        localStorage.toRequest = "listing-" + listingId;
         return;
     }
     var listingsData = getListingsData();
@@ -63,6 +64,7 @@ function handleRequest(buttonId) {
         alerts[2].classList.remove("hidden");
         return;
     }
+    localStorage.removeItem("toRequest");
     addRequest(listingsData, listingIndex);
 }
 
