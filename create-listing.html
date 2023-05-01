@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>Bowdoin FreeCycle</title>
+  <link rel="icon" type="image/x-icon" href="assets/recycle.png">
+ 
+  <!-- stylesheets-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="stylesheets/main.css" >
+  
+</head>
+<body>
+  <nav class="navbar navbar-default nav-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">
+              <span>Bowdoin FreeCycle</span>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a><span class="sr-only">(current)</span></li>
+            <li><a href="listings.html">Listings</a></li>
+            <li><a href="howitwork.html">How it Works</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right"></ul>
+        </div>
+    </div>
+  </nav>
+
+  <div class="content">
+    <div class="main-content">
+      <div class="title">
+        <h1 class="text-center">Create a Listing</h1>
+      </div>
+      <div class="subtitle">
+      </div>
+
+      <!-- form stuff -->
+      <form class = "col-md-6" >
+        
+        <div class="form-group">
+            <label for="itemName">Item Name</label>
+            <input type="text" class="form-control" id="itemName" placeholder="">
+        </div>
+
+        <div class="form-group">
+            <label for="categorySelectDropdown">Category</label>
+            <select class="form-control" id="categorySelectDropdown">
+              <option>Dorm</option>
+              <option>School</option>
+              <option>Kitchen</option>
+              <option>Furniture</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="conditionSelectDropdown">Condition</label>
+            <select class="form-control" id="conditionSelectDropdown">
+              <option>Poor</option>
+              <option>Fair</option>
+              <option>Good</option>
+              <option>Like New</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" id="amount" placeholder="1">
+            </div>
+
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="freeRadio" value="Free" checked>
+                <label class="form-check-label" for="freeRadio">
+                  Free
+                </label>
+                <input class="form-check-input" type="radio" name="exampleRadios" id="priceRadio" value="">
+                <label class="form-check-label" for="priceRadio">
+                  Price
+                </label>
+                <input type = "number" class = "form-control" id = "priceInput">
+                <small id="priceInstructions" class="form-text text-muted">Enter price here if not free.</small>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Item description</label>
+            <textarea class="form-control" id="description" rows="3"></textarea>
+          </div>
+
+          <label class="form-label" for="customFile">Upload image</label>
+        <input type="file" class="form-control" id="customFile" />
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+       </form>
+  </div>
+
+
+
+  <!-- bootstrap-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/listings.js"></script>
+  <script src="js/defaultListingsData.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,4 +1,5 @@
 function performSearch(){
+
     var searchQuery = document.getElementById("search").value;
 
     var filteredListings = searchListings(searchQuery);
