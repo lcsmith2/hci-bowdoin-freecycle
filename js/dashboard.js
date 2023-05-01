@@ -36,6 +36,19 @@ function dismissConfirm() {
     confirmAlert.classList.add("hidden");
 }
 
+function toggleRequests() {
+    var requestsDiv = document.getElementsByClassName("requests")[0];
+    var toggleButton = document.getElementsByClassName("requests-toggle")[0];
+    if (requestsDiv.classList.contains("hidden")) {
+        requestsDiv.classList.remove("hidden");
+        toggleButton.innerText = "Click to Hide";
+    }
+    else {
+        requestsDiv.classList.add("hidden");
+        toggleButton.innerText = "Click to Show";
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function(event) {
     displayWelcome();
     displayRequests();
