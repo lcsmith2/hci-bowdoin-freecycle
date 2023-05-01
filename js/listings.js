@@ -1,6 +1,6 @@
 const DESCRIPTION_LEN = 50;
 
-function setOnClick(listingId, actions) {
+function setAction(listingId, actions) {
     actions.forEach(function(action) {
         var button = document.getElementsByClassName(action + "-btn")[0];
         button.id = action + "-" + listingId;
@@ -14,6 +14,8 @@ function setOnClick(listingId, actions) {
                 button.onclick = function() {
                     handleCancel(button.id)
                 };
+                var cancelButton = document.getElementsByClassName("cancel-btn")[0];
+                cancelButton.classList.remove("hidden");
                 break;
         }
     });
@@ -44,7 +46,7 @@ function handleDetails(buttonId, actions) {
     requestInfo.appendChild(document.createTextNode(requestInfoText));
     modalBodyContent.appendChild(requestInfo);
 
-    setOnClick(listingId, actions);
+    setAction(listingId, actions);
 }
 
 function addRequest(listingsData, listingIndex) {
@@ -84,7 +86,14 @@ function handleRequest(buttonId) {
 }
 
 function cancelRequest(listingId) {
-    console.log(listingId);
+    var cancelSucessAlert = document.getElementsByClassName("cancel-success-alert")[0];
+    var confirmAlert = document.getElementsByClassName("cancel-alert")[0];
+    var modalButtons = document.getElementsByClassName("footer-btns")[0];
+    var cancelButton = document.getElementsByClassName("cancel-btn")[0];
+    cancelSucessAlert.classList.remove("hidden");
+    confirmAlert.classList.add("hidden");
+    modalButtons.classList.remove("hidden");
+    cancelButton.classList.add("hidden");
 }
 
 function handleCancel(buttonId) {
