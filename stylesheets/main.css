@@ -350,5 +350,6 @@ footer {
 }
 
 #filter-list > p{
-   display:inline;
+
+   display: inline-block;
 }
