@@ -4,6 +4,7 @@ function setAction(listingId, actions) {
     actions.forEach(function(action) {
         var button = document.getElementsByClassName(action + "-btn")[0];
         button.id = action + "-" + listingId;
+        button.classList.remove("hidden");
         switch(action) {
             case "request":
                 button.onclick = function() {
@@ -14,8 +15,11 @@ function setAction(listingId, actions) {
                 button.onclick = function() {
                     handleCancel(button.id)
                 };
-                var cancelButton = document.getElementsByClassName("cancel-btn")[0];
-                cancelButton.classList.remove("hidden");
+                break;
+            case "delete":
+                button.onclick = function() {
+                    handleDelete(button.id)
+                };
                 break;
         }
     });
@@ -102,9 +106,25 @@ function handleCancel(buttonId) {
     modalButtons.classList.add("hidden");
     var confirmAlert = document.getElementsByClassName("cancel-alert")[0];
     confirmAlert.classList.remove("hidden");
-    var confirmButton = document.getElementsByClassName("confirm-btn")[0];
+    var confirmButton = document.getElementsByClassName("confirm-cancel-btn")[0];
     confirmButton.onclick = function() {
         cancelRequest(listingId)
+    }
+}
+
+function deleteListing(listingId) {
+    console.log(listingId);
+}
+
+function handleDelete(buttonId) {
+    var listingId = buttonId.split("-")[1];
+    var modalButtons = document.getElementsByClassName("footer-btns")[0];
+    modalButtons.classList.add("hidden");
+    var confirmAlert = document.getElementsByClassName("delete-alert")[0];
+    confirmAlert.classList.remove("hidden");
+    var confirmButton = document.getElementsByClassName("confirm-delete-btn")[0];
+    confirmButton.onclick = function() {
+        deleteListing(listingId)
     }
 }
 
@@ -193,11 +213,15 @@ function getListing(listingData, shortenDescription, imageButton, actions) {
     return listing;
 }
 
+// When modal is hidden
 $(("#listing-modal")).on("hidden.bs.modal", function() {
     hideAlerts()
     var modalButtons = document.getElementsByClassName("footer-btns");
     if (modalButtons.length > 0) {
-        modalButtons[0].classList.remove("hidden");
+        // Hide all but "close" button
+        for (let i = 1; i < modalButtons[0].children.length; i++) {
+            modalButtons[0].children[i].classList.add("hidden");
+        }
     }
 });
  
