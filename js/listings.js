@@ -1,7 +1,7 @@
 const DESCRIPTION_LEN = 50;
 
 function handleDetails(buttonId) {
-    var listingId = buttonId.split("-")[1];
+    var listingId = buttonId.split("-").pop();
 
     var listingsData = getListingsData();
     var listingData = listingsData.find(function(listing) {
@@ -35,15 +35,17 @@ function handleDetails(buttonId) {
 function addRequest(listingsData, listingIndex) {
     listingsData[listingIndex]["requests"].push({ "user": localStorage.user });
     localStorage.listingsData = JSON.stringify(listingsData);
+    localStorage.lastRequestedListing = JSON.stringify(listingsData[listingIndex]);
     location.href = "request-confirmed.html";
 }
 
 function handleRequest(buttonId) {
-    var listingId = buttonId.split("-")[1];
+    var listingId = buttonId.split("-").pop();
     var alerts = document.getElementsByClassName("request-alert");
     // User isn't logged in
     if (localStorage.user === undefined || localStorage.user === null) {
         alerts[0].classList.remove("hidden");
+        localStorage.toRequest = "listing-" + listingId;
         return;
     }
     var listingsData = getListingsData();
@@ -62,6 +64,7 @@ function handleRequest(buttonId) {
         alerts[2].classList.remove("hidden");
         return;
     }
+    localStorage.removeItem("toRequest");
     addRequest(listingsData, listingIndex);
 }
 
@@ -94,7 +97,8 @@ function getListingInfo(listingData, shortenDescription) {
     listingInfo.appendChild(listingPrice);
 
     var listingCategory = document.createElement("p");
-    var category = `Category: ${listingData["category"]}`;
+    var cat = listingData["category"];
+    var category = `Category: ${cat[0].toUpperCase() + cat.slice(1)}`;
     listingCategory.appendChild(document.createTextNode(category));
     listingInfo.appendChild(listingCategory);
 
@@ -113,12 +117,24 @@ function getListingInfo(listingData, shortenDescription) {
     return listingInfo;
 }
 
-function getListing(listingData, shortenDescription) {
+function getListing(listingData, shortenDescription, imageButton, buttonName="Details") {
     var listing = document.createElement("div");
     listing.classList.add("listing");
 
     var listingImage = getListingImage(listingData);
-    listing.appendChild(document.createElement("div").appendChild(listingImage));
+    if (!imageButton) {
+        listing.appendChild(document.createElement("div").appendChild(listingImage));
+    }
+    else {
+        listingImage.classList.add("img-btn");
+        listingImage.id = "listing-img-" + listingData["id"];
+        listingImage.setAttribute("data-toggle", "modal");
+        listingImage.setAttribute("data-target", "#listing-modal");
+        listingImage.onclick = function() {
+            handleDetails(listingImage.id)
+        };
+        listing.appendChild(document.createElement("div").appendChild(listingImage));
+    }
     
     var listingInfo = getListingInfo(listingData, shortenDescription);
 
@@ -130,7 +146,7 @@ function getListing(listingData, shortenDescription) {
     listingButton.onclick = function() {
         handleDetails(listingButton.id)
     };
-    listingButton.appendChild(document.createTextNode("Details"));
+    listingButton.appendChild(document.createTextNode(buttonName));
     listingInfo.appendChild(listingButton);
 
     listing.appendChild(listingInfo);

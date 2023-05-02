@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <title>Bowdoin FreeCycle</title>
+  <link rel="icon" type="image/x-icon" href="assets/recycle.png">
  
   <!-- stylesheets-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -42,8 +43,8 @@
     <div class="main-content">
       <div class="main-title">
         <h1 class="text-center">Bowdoin FreeCycle</h1>
-        <div class="main-image style="position: relative;">
-          <img src="/assets/meadow-pine-trees.jpg">
+        <div class="main-image" style="position: relative;">
+          <img src="assets/meadow-pine-trees.jpg">
           <div class="text-box" style="position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%);">
             <h2>Welcome to Bowdoin Freecycle!</h2>
             <p>Our mission is to help Bowdoin students find dorm room or apartment needs efficiently and sustainably. 
@@ -57,7 +58,7 @@
 
   <div class="homecategories">
     <div class="homecategory" >
-      <a href="listings.html" onclick="localStorage.setItem('categoryFiltered', 'home')">
+      <a href="listings.html" onclick="localStorage.setItem('categoryFiltered', 'kitchen')">
         <img class="homecategory img" src="assets/kitchen.jpg" alt="Kitchen">
         <h5 class="homecategory-title" href="listings.html">Kitchen</h5>
       </a>
@@ -91,29 +92,24 @@
   <div class="hometext">
     <h3 class="hometextin" style="font-weight: normal;">Or&nbsp</h3> 
     <form class="hometextin" action="listings.html">
-      <input style="align-items:center" type="submit" value="View All">
+      <input style="align-items:center" class="btn btn-primary" type="submit" value="View All">
     </form>
   </div>
   <div class="hometext">
     <h3 class="hometextin" style="font-weight: normal;">New to FreeCycle?&nbsp</h3>
     <form class="hometextin" action="howitwork.html">
-      <input style="align-items:center" type="submit" value="Learn How it Works!">
+      <input style="align-items:center" class="btn btn-primary" type="submit" value="Learn How it Works!">
     </form>
   </div>
 
   
-  <main></main>
-  
   <footer> 
-    <center>
     <small>
       Affiliated with 
       <a href="https://www.bowdoin.edu/sustainability/sustainability-initiatives/give-and-go.html">Bowdoin College Office of Sustainability</a>
       , 
-      <a href="mailto:sustainability@bowdoin.edu">sustainability@bowdoin.edu</a>
-      
+      <a href="mailto:sustainability@bowdoin.edu">sustainability@bowdoin.edu</a> 
     </small>
-  </center>
   </footer>
 
   <!-- bootstrap-->
