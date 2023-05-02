@@ -52,7 +52,7 @@ function dismissConfirm(buttonId) {
 }
 
 function toggleSection(buttonId) {
-    var buttonClass = buttonId.split("-")[1];
+    var buttonClass = buttonId.split("-")[0];
     var sectionDiv = document.getElementsByClassName(buttonClass)[0];
     var toggleButton = document.getElementById(buttonId);
     if (sectionDiv.classList.contains("hidden")) {

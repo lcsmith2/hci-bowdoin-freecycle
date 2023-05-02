@@ -96,6 +96,11 @@ function cancelRequest(listingId) {
 
 function deleteListing(listingId) {
     // TODO: js to delete listing
+    listings = getListingsData()
+    var index = listings.map(function (listing) { return listing.id; }).indexOf(listingId)
+    listings.splice(index, 1)
+    console.log(listings)
+    displayOwnedListings()
     showActionSuccess("delete");
 }
 
