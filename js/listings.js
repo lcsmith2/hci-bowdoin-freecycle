@@ -13,12 +13,12 @@ function setAction(listingId, actions) {
                 break;
             case "cancel":
                 button.onclick = function() {
-                    handleCancel(button.id)
+                    showConfirm(button.id)
                 };
                 break;
             case "delete":
                 button.onclick = function() {
-                    handleDelete(button.id)
+                    showConfirm(button.id)
                 };
                 break;
         }
@@ -90,41 +90,51 @@ function handleRequest(buttonId) {
 }
 
 function cancelRequest(listingId) {
-    var cancelSucessAlert = document.getElementsByClassName("cancel-success-alert")[0];
-    var confirmAlert = document.getElementsByClassName("cancel-alert")[0];
-    var modalButtons = document.getElementsByClassName("footer-btns")[0];
-    var cancelButton = document.getElementsByClassName("cancel-btn")[0];
-    cancelSucessAlert.classList.remove("hidden");
-    confirmAlert.classList.add("hidden");
-    modalButtons.classList.remove("hidden");
-    cancelButton.classList.add("hidden");
-}
-
-function handleCancel(buttonId) {
-    var listingId = buttonId.split("-")[1];
-    var modalButtons = document.getElementsByClassName("footer-btns")[0];
-    modalButtons.classList.add("hidden");
-    var confirmAlert = document.getElementsByClassName("cancel-alert")[0];
-    confirmAlert.classList.remove("hidden");
-    var confirmButton = document.getElementsByClassName("confirm-cancel-btn")[0];
-    confirmButton.onclick = function() {
-        cancelRequest(listingId)
-    }
+    // TODO: js to cancel request
+    showActionSuccess("cancel");
 }
 
 function deleteListing(listingId) {
-    console.log(listingId);
+    // TODO: js to delete listing
+    showActionSuccess("delete");
 }
 
-function handleDelete(buttonId) {
-    var listingId = buttonId.split("-")[1];
+function showActionSuccess(action) {
+    var sucessAlert = document.getElementsByClassName("success-alert")[0];
+    var confirmAlert = document.getElementsByClassName(action + "-alert")[0];
+    var modalButtons = document.getElementsByClassName("footer-btns")[0];
+    var cancelButton = document.getElementsByClassName(action + "-btn")[0];
+    sucessAlert.classList.remove("hidden");
+    confirmAlert.classList.add("hidden");
+    modalButtons.classList.remove("hidden");
+    cancelButton.classList.add("hidden");
+    switch (action) {
+        case "cancel":
+            sucessAlert.innerText = "Successfully canceled your request for this listing";
+            break;
+        case "delete":
+            sucessAlert.innerText = "Successfully deleted this listing";
+    }
+}
+
+function showConfirm(buttonId) {
+    var [action, listingId] = buttonId.split("-");
     var modalButtons = document.getElementsByClassName("footer-btns")[0];
     modalButtons.classList.add("hidden");
-    var confirmAlert = document.getElementsByClassName("delete-alert")[0];
+    var confirmAlert = document.getElementsByClassName(action + "-alert")[0];
     confirmAlert.classList.remove("hidden");
-    var confirmButton = document.getElementsByClassName("confirm-delete-btn")[0];
-    confirmButton.onclick = function() {
-        deleteListing(listingId)
+    var confirmButton = document.getElementsByClassName(`confirm-${action}-btn`)[0];
+    switch (action) {
+        case "cancel":
+            confirmButton.onclick = function() {
+                cancelRequest(listingId)
+            }
+            break;
+        case "delete":
+            confirmButton.onclick = function() {
+                deleteListing(listingId)
+            }
+            break;
     }
 }
 
