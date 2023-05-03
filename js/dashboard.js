@@ -2,13 +2,16 @@ function displayWelcome(){
     if (localStorage.user === undefined || localStorage.user === null || localStorage.user === ""){
         return;
     }
-    document.getElementById("welcomeMessage").innerHTML = "Welcome back " + localStorage.user + " !";
+    if( document.getElementById("welcomeMessage")){
+        document.getElementById("welcomeMessage").innerHTML = "Welcome back " + localStorage.user + " !";
+    }
+   
 }
 
 function displayRequests(){
     var listingsData = getListingsData();
     var listingsDiv = document.getElementsByClassName("requests")[0];
-    listingsDiv.replaceChildren();
+    if(listingsDiv) listingsDiv.replaceChildren();
     for (var i = 0; i < listingsData.length; i++) {
         if (userRequestedItem(listingsData[i])){
             listingsDiv.appendChild(getListing(listingsData[i], true, true, "Cancel"));
