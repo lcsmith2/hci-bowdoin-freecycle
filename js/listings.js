@@ -91,16 +91,21 @@ function handleRequest(buttonId) {
 
 function cancelRequest(listingId) {
     // TODO: js to cancel request
+    var listings = getListingsData();
+    var index = listings.map(function (listing) { return listing.id; }).indexOf(listingId);
+    var userIndex = listings[index].requests.map(function (request) { return request.user; }).indexOf(localStorage.user);
+    listings[index].requests.splice(userIndex, 1);
+    localStorage.listingsData = JSON.stringify(listings);
+    displayRequests();
     showActionSuccess("cancel");
 }
 
 function deleteListing(listingId) {
-    // TODO: js to delete listing
-    listings = getListingsData()
-    var index = listings.map(function (listing) { return listing.id; }).indexOf(listingId)
-    listings.splice(index, 1)
-    console.log(listings)
-    displayOwnedListings()
+    var listings = getListingsData();
+    var index = listings.map(function (listing) { return listing.id; }).indexOf(listingId);
+    listings.splice(index, 1);
+    localStorage.listingsData = JSON.stringify(listings);
+    displayOwnedListings();
     showActionSuccess("delete");
 }
 
