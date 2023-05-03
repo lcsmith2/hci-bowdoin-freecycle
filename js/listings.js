@@ -20,9 +20,25 @@ function setAction(listingId, actions) {
                 button.onclick = function() {
                     showConfirm(button.id)
                 };
+                populateRequests(listingId);
                 break;
         }
     });
+}
+
+function populateRequests(listingId) {
+    var requestInfo = Array.from(document.getElementsByClassName("listing-info")).slice(-1);
+    var listings = getListingsData();
+    var users = listings[listingId].requests.map(function(request) {
+        return request.user;
+    });
+    if (users.length > 0) {
+        requestInfo[0].lastChild.innerText = `Requested by: ${users.join(", ")}`;
+    }
+    else {
+        requestInfo[0].lastChild.innerText = "No one has requested this item yet";
+    }
+    console.log(requestInfo[0].lastChild);
 }
 
 function handleDetails(buttonId, actions) {
@@ -90,7 +106,6 @@ function handleRequest(buttonId) {
 }
 
 function cancelRequest(listingId) {
-    // TODO: js to cancel request
     var listings = getListingsData();
     var index = listings.map(function (listing) { return listing.id; }).indexOf(listingId);
     var userIndex = listings[index].requests.map(function (request) { return request.user; }).indexOf(localStorage.user);
