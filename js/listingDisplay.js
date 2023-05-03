@@ -175,7 +175,7 @@ function displaySearchListings(terms) {
 
     terms.forEach(function(listingData) {
         listingData = JSON.parse(listingData);
-        listingsDiv.appendChild(getListing(listingData, true, true))
+        listingsDiv.appendChild(getListing(listingData, true, true, ["request"]))
     });
 
 }
@@ -193,7 +193,7 @@ function displayFilterListings(terms) {
 
     terms.forEach(function(listingData) {
         listingData = JSON.parse(listingData);
-        listingsDiv.appendChild(getListing(listingData, true, true))
+        listingsDiv.appendChild(getListing(listingData, true, true, ["request"]))
     });
 
 }
@@ -210,7 +210,7 @@ function displayListings() {
         var listingsDiv = document.getElementsByClassName("listings")[0];
         listingsDiv.replaceChildren();
         listingsData.forEach(function(listingData) {
-            listingsDiv.appendChild(getListing(listingData, true, true))
+            listingsDiv.appendChild(getListing(listingData, true, true, ["request"]))
         });
     }
    
@@ -231,7 +231,7 @@ function displayCategoryFilterListings(category){
       listings.forEach(function(entry) {
         if(entry.category.toLowerCase() == category.toLowerCase()){
             addedListing = true;
-            listingsDiv.appendChild(getListing(entry, true, true))
+            listingsDiv.appendChild(getListing(entry, true, true, ["request"]))
         }
         
         });
@@ -249,6 +249,12 @@ function displayCategoryFilterListings(category){
   
 document.addEventListener("DOMContentLoaded", function(event) {
     displayListings();
+    if (localStorage.toRequest !== undefined) {
+        handleDetails("listing-" + localStorage.toRequest, ["request"]);
+        $("#listing-modal").modal("show");
+        handleRequest(localStorage.toRequest);
+        localStorage.removeItem("toRequest");
+    }
 });
 
 function getFilterList() {

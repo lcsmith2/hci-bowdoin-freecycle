@@ -7,8 +7,13 @@ function saveUser(){
         alert("Must have valid username and passwords!");
         return;
     }
-    location.href = "dashboard.html";
     localStorage.user = userName;
+    if (localStorage.toRequest !== undefined) {
+        location.href = "listings.html";
+    }
+    else {
+        location.href = "dashboard.html";
+    }
 }
 
 
