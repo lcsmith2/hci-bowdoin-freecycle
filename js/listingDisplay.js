@@ -250,7 +250,7 @@ function displayCategoryFilterListings(category){
 document.addEventListener("DOMContentLoaded", function(event) {
     displayListings();
     if (localStorage.toRequest !== undefined) {
-        handleDetails(localStorage.toRequest);
+        handleDetails("listing-" + localStorage.toRequest, ["request"]);
         $("#listing-modal").modal("show");
         handleRequest(localStorage.toRequest);
         localStorage.removeItem("toRequest");
