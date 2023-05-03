@@ -249,12 +249,6 @@ function displayCategoryFilterListings(category){
   
 document.addEventListener("DOMContentLoaded", function(event) {
     displayListings();
-    if (localStorage.toRequest !== undefined) {
-        handleDetails(localStorage.toRequest);
-        $("#listing-modal").modal("show");
-        handleRequest(localStorage.toRequest);
-        localStorage.removeItem("toRequest");
-    }
 });
 
 function getFilterList() {
