@@ -3,6 +3,9 @@
 const form = document.querySelector('#listing-form');
 form.addEventListener('submit', handleSubmit);
 
+let curr_listings = JSON.parse(localStorage.listingsData);
+console.log(curr_listings);
+
 function enablePrice(){
     document.querySelector("#priceInput").disabled = false;
 
@@ -41,24 +44,17 @@ function handleSubmit(event) {
     //alert(value);
     console.log({ value });
 
-    defaultListingsData.push(value);
-    console.log(defaultListingsData[defaultListingsData.length - 1]);
-    console.log("pushed?");
+    if (localStorage.listingsData === undefined) {
+        localStorage.listingsData = JSON.stringify(defaultListingsData);
+        //console.log("listings:", JSON.stringify(defaultListingsData));
+    }
+    let curr_listings = JSON.parse(localStorage.listingsData);
+    curr_listings.push(value);
+    //console.log(curr_listings);
+    localStorage.listingsData = JSON.stringify(curr_listings);
+    //defaultListingsData.push(value);
+    //console.log(defaultListingsData[defaultListingsData.length - 1]);
+    console.log("pushed");
+    
+
   }
-
-
-// function createTheListing(){
-
-//     console.log("yeah!");
-//     //get the info from each listing item
-//     let form = document.getElementById("listing-form");
-//     let data = new FormData(form);
-//     for (let [key, val] of data) {
-//         //alert(key.toString() +  val.toString() +  "<3");
-//         console.log(key, val, "<3");
-//     }
-
- 
-
-
-// }
