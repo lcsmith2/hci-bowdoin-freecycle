@@ -49,12 +49,20 @@ function handleSubmit(event) {
         //console.log("listings:", JSON.stringify(defaultListingsData));
     }
     let curr_listings = JSON.parse(localStorage.listingsData);
-    curr_listings.push(value);
+    //make sure required fields were defined 
+
+
+    
     //console.log(curr_listings);
-    localStorage.listingsData = JSON.stringify(curr_listings);
-    //defaultListingsData.push(value);
-    //console.log(defaultListingsData[defaultListingsData.length - 1]);
-    console.log("pushed");
+    if(value["name"] != "" && value["description"] != ""){
+        curr_listings.push(value);
+        localStorage.listingsData = JSON.stringify(curr_listings);
+        console.log("pushed");
+        window.location.href = "listing-success.html";
+    } else {
+        alert("You may be missing some fields, please fill in name and description then try again.");
+    }
+    
     
 
   }
