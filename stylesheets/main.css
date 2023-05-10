@@ -308,6 +308,11 @@ footer {
    padding-left: 20rem;
 }
 
+.steps li {
+   padding-top: 1rem;
+   font-size: 1.5em;
+}
+
 @media screen and (max-width: 600px) {
    .listings {
       flex-direction: column;
