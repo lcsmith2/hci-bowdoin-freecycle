@@ -26,6 +26,7 @@ function handleSubmit(event) {
         value["price"] = "Free";
         delete value["free"];
     }
+    value["category"] = value["category"].toLowerCase();
     
     delete value["img"];
     value["user"] = localStorage.getItem("user");
@@ -46,12 +47,16 @@ function handleSubmit(event) {
     let curr_listings = JSON.parse(localStorage.listingsData);
     //make sure required fields were defined 
     
-    if(value["name"] != "" && value["description"] != ""){
+
+    //console.log(curr_listings);
+    if(value["name"] != "" && value["description"] != "" && value["category"] != "" && value["condition"] != ""){
+
         curr_listings.push(value);
         localStorage.listingsData = JSON.stringify(curr_listings);
         console.log("pushed");
         window.location.href = "listing-success.html";
     } else {
-        alert("You may be missing some fields, please fill in name and description then try again.");
+    
+        $('#submission-modal').modal('show');
     }
   }
