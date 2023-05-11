@@ -2,13 +2,13 @@ var defaultListingsData = [
     {
         id: "0",
         user: "user0",
-        name: "Item 0",
-        image: "./assets/placeholder.png",
+        name: "Lamp",
+        image: "./assets/lamp.jpg",
         amount: "1",
         category: "furniture",
         condition: "Like new",
         price: "Free",
-        description: "Lorem search term ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        description: "Basic amazon lamp (black). Only used for a month!",
         requests: [
             {
                 user: "user",
@@ -18,13 +18,13 @@ var defaultListingsData = [
     {
         id: "1",
         user: "user1",
-        name: "Item 1",
-        image: "./assets/placeholder.png",
+        name: "Orgo Molecular Model Kit",
+        image: "./assets/orgo.jpg",
         amount: "1",
         category: "school",
         condition: "Like new",
         price: "5.00",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        description: "Required for Orgo! Must have! Very helpful for your exam!",
         requests: [],
     },
     {
@@ -36,7 +36,7 @@ var defaultListingsData = [
         category: "dorm",
         condition: "Good",
         price: "Free",
-        description: "Lorem search term ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        description: "Can efficiently and quickly boiling water! Perfect for tea, coffee, and instant noodles!",
         requests: [
             {
                 user: "user",
@@ -52,7 +52,7 @@ var defaultListingsData = [
         category: "dorm",
         condition: "Poor",
         price: "Free",
-        description: "Please help the cactus. Lorem search term ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        description: "Please help the cactus.",
         requests: [
             {
                 user: "user",
@@ -68,7 +68,7 @@ var defaultListingsData = [
         category: "kitchen",
         condition: "Like new",
         price: "10.00",
-        description: "Cute keurig coffee machine. Needs K-cups. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        description: "Cute keurig coffee machine. Needs K-cups.",
         requests: [
             {
                 user: "user1",

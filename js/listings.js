@@ -1,6 +1,47 @@
 const DESCRIPTION_LEN = 50;
 
-function handleDetails(buttonId) {
+function setAction(listingId, actions) {
+    actions.forEach(function(action) {
+        var button = document.getElementsByClassName(action + "-btn")[0];
+        button.id = action + "-" + listingId;
+        button.classList.remove("hidden");
+        switch(action) {
+            case "request":
+                button.onclick = function() {
+                    handleRequest(button.id)
+                };
+                break;
+            case "cancel":
+                button.onclick = function() {
+                    showConfirm(button.id)
+                };
+                break;
+            case "delete":
+                button.onclick = function() {
+                    showConfirm(button.id)
+                };
+                populateRequests(listingId);
+                break;
+        }
+    });
+}
+
+function populateRequests(listingId) {
+    var requestInfo = Array.from(document.getElementsByClassName("listing-info")).slice(-1);
+    var listings = getListingsData();
+    var users = listings[listingId].requests.map(function(request) {
+        return request.user;
+    });
+    if (users.length > 0) {
+        requestInfo[0].lastChild.innerText = `Requested by: ${users.join(", ")}`;
+    }
+    else {
+        requestInfo[0].lastChild.innerText = "No one has requested this item yet";
+    }
+    console.log(requestInfo[0].lastChild);
+}
+
+function handleDetails(buttonId, actions) {
     var listingId = buttonId.split("-").pop();
 
     var listingsData = getListingsData();
@@ -25,11 +66,7 @@ function handleDetails(buttonId) {
     requestInfo.appendChild(document.createTextNode(requestInfoText));
     modalBodyContent.appendChild(requestInfo);
 
-    var requestButton = document.getElementsByClassName("request-btn")[0];
-    requestButton.id = "request-" + listingId;
-    requestButton.onclick = function() {
-        handleRequest(requestButton.id)
-    };
+    setAction(listingId, actions);
 }
 
 function addRequest(listingsData, listingIndex) {
@@ -45,6 +82,7 @@ function handleRequest(buttonId) {
     // User isn't logged in
     if (localStorage.user === undefined || localStorage.user === null) {
         alerts[0].classList.remove("hidden");
+        localStorage.toRequest = "listing-" + listingId;
         return;
     }
     var listingsData = getListingsData();
@@ -63,11 +101,70 @@ function handleRequest(buttonId) {
         alerts[2].classList.remove("hidden");
         return;
     }
+    localStorage.removeItem("toRequest");
     addRequest(listingsData, listingIndex);
 }
 
-function hideRequestAlerts() {
-    var alerts = Array.from(document.getElementsByClassName("request-alert"));
+function cancelRequest(listingId) {
+    var listings = getListingsData();
+    var index = listings.map(function (listing) { return listing.id; }).indexOf(listingId);
+    var userIndex = listings[index].requests.map(function (request) { return request.user; }).indexOf(localStorage.user);
+    listings[index].requests.splice(userIndex, 1);
+    localStorage.listingsData = JSON.stringify(listings);
+    displayRequests();
+    showActionSuccess("cancel");
+}
+
+function deleteListing(listingId) {
+    var listings = getListingsData();
+    var index = listings.map(function (listing) { return listing.id; }).indexOf(listingId);
+    listings.splice(index, 1);
+    localStorage.listingsData = JSON.stringify(listings);
+    displayOwnedListings();
+    showActionSuccess("delete");
+}
+
+function showActionSuccess(action) {
+    var sucessAlert = document.getElementsByClassName("success-alert")[0];
+    var confirmAlert = document.getElementsByClassName(action + "-alert")[0];
+    var modalButtons = document.getElementsByClassName("footer-btns")[0];
+    var cancelButton = document.getElementsByClassName(action + "-btn")[0];
+    sucessAlert.classList.remove("hidden");
+    confirmAlert.classList.add("hidden");
+    modalButtons.classList.remove("hidden");
+    cancelButton.classList.add("hidden");
+    switch (action) {
+        case "cancel":
+            sucessAlert.innerText = "Successfully canceled your request for this listing";
+            break;
+        case "delete":
+            sucessAlert.innerText = "Successfully deleted this listing";
+    }
+}
+
+function showConfirm(buttonId) {
+    var [action, listingId] = buttonId.split("-");
+    var modalButtons = document.getElementsByClassName("footer-btns")[0];
+    modalButtons.classList.add("hidden");
+    var confirmAlert = document.getElementsByClassName(action + "-alert")[0];
+    confirmAlert.classList.remove("hidden");
+    var confirmButton = document.getElementsByClassName(`confirm-${action}-btn`)[0];
+    switch (action) {
+        case "cancel":
+            confirmButton.onclick = function() {
+                cancelRequest(listingId)
+            }
+            break;
+        case "delete":
+            confirmButton.onclick = function() {
+                deleteListing(listingId)
+            }
+            break;
+    }
+}
+
+function hideAlerts() {
+    var alerts = Array.from(document.getElementsByClassName("alert"));
     alerts.forEach(function(alert) {
         alert.classList.add("hidden")
     });
@@ -115,7 +212,7 @@ function getListingInfo(listingData, shortenDescription) {
     return listingInfo;
 }
 
-function getListing(listingData, shortenDescription, imageButton, buttonName="Details") {
+function getListing(listingData, shortenDescription, imageButton, actions) {
     var listing = document.createElement("div");
     listing.classList.add("listing");
 
@@ -129,7 +226,7 @@ function getListing(listingData, shortenDescription, imageButton, buttonName="De
         listingImage.setAttribute("data-toggle", "modal");
         listingImage.setAttribute("data-target", "#listing-modal");
         listingImage.onclick = function() {
-            handleDetails(listingImage.id)
+            handleDetails(listingImage.id, actions)
         };
         listing.appendChild(document.createElement("div").appendChild(listingImage));
     }
@@ -142,12 +239,24 @@ function getListing(listingData, shortenDescription, imageButton, buttonName="De
     listingButton.setAttribute("data-toggle", "modal");
     listingButton.setAttribute("data-target", "#listing-modal");
     listingButton.onclick = function() {
-        handleDetails(listingButton.id)
+        handleDetails(listingButton.id, actions)
     };
-    listingButton.appendChild(document.createTextNode(buttonName));
+    listingButton.appendChild(document.createTextNode("Details"));
     listingInfo.appendChild(listingButton);
 
     listing.appendChild(listingInfo);
     return listing;
 }
+
+// When modal is hidden
+$(("#listing-modal")).on("hidden.bs.modal", function() {
+    hideAlerts()
+    var modalButtons = document.getElementsByClassName("footer-btns");
+    if (modalButtons.length > 0) {
+        // Hide all but "close" button
+        for (let i = 1; i < modalButtons[0].children.length; i++) {
+            modalButtons[0].children[i].classList.add("hidden");
+        }
+    }
+});
  

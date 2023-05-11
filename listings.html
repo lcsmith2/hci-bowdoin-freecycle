@@ -48,9 +48,9 @@
     <div class = "searchbar">
 
       <input type = "text" id = "search">
-      <button class = "button btn btn-primary" id = "searchbutton" onclick = "performSearch()"><p>Search</p></button>
+      <button class = "button btn btn-primary" id = "searchbutton" onclick = "performSearch()">Search</button>
       <p style="margin-left: .5em;  text-align:center;font-size:1.25em; "> or </p>
-      <button class = "button btn btn-primary" id = "filterbutton" data-toggle="modal" data-target="#filter-modal"><p>Filter</p></button>
+      <button class = "button btn btn-primary" id = "filterbutton" data-toggle="modal" data-target="#filter-modal">Filter</button>
 
     </div>
     
@@ -61,7 +61,7 @@
   </div>
 
   <!-- From https://getbootstrap.com/docs/4.0/components/modal/ -->
-  <div class="modal fade" id="listing-modal" tabindex="-1" role="dialog" aria-labelledby="listing-modal-label" aria-hidden="true">
+  <div class="modal fade" id="listing-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -79,7 +79,7 @@
           <div class="hidden request-alert alert" role="alert">
             Unable to request: You already made a request for this listing.
           </div>
-          <button onclick="hideRequestAlerts()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="request-btn btn btn-primary">Request</button>
         </div>
       </div>
@@ -88,7 +88,7 @@
 
 
   <!-- popup-->
-  <div class="modal fade" id="filter-modal" tabindex="-1" role="dialog" aria-labelledby="filter-modal-label" aria-hidden="true">
+  <div class="modal fade" id="filter-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -149,8 +149,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="js/main.js"></script>
-  <script src="js/listings.js"></script>
-  <script src="js/listingDisplay.js"></script>
+  <script src="js/listings.js" defer></script>
+  <script src="js/listingDisplay.js" defer></script>
   <script src="js/defaultListingsData.js"></script>
 </body>
 
