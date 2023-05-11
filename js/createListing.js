@@ -30,6 +30,7 @@ function handleSubmit(event) {
         value["price"] = "Free";
         delete value["free"];
     }
+    value["category"] = value["category"].toLowerCase();
     
     delete value["img"];
     value["user"] = localStorage.getItem("user");
@@ -54,7 +55,7 @@ function handleSubmit(event) {
 
     
     //console.log(curr_listings);
-    if(value["name"] != "" && value["description"] != ""){
+    if(value["name"] != "" && value["description"] != "" && value["category"] != "" && value["condition"] != ""){
         curr_listings.push(value);
         localStorage.listingsData = JSON.stringify(curr_listings);
         console.log("pushed");
