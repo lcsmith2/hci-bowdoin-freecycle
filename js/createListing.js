@@ -60,7 +60,8 @@ function handleSubmit(event) {
         console.log("pushed");
         window.location.href = "listing-success.html";
     } else {
-        alert("You may be missing some fields, please fill in name and description then try again.");
+    
+        $('#submission-modal').modal('show');
     }
     
     
