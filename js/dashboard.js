@@ -58,13 +58,14 @@ function toggleSection(buttonId) {
     var buttonClass = buttonId.split("-")[0];
     var sectionDiv = document.getElementsByClassName(buttonClass)[0];
     var toggleButton = document.getElementById(buttonId);
+    var currentText = toggleButton.innerText.split(" ");
     if (sectionDiv.classList.contains("hidden")) {
         sectionDiv.classList.remove("hidden");
-        toggleButton.innerText = "Click to Hide";
+        toggleButton.innerText = "Hide " + currentText.slice(1).join(" ");
     }
     else {
         sectionDiv.classList.add("hidden");
-        toggleButton.innerText = "Click to Show";
+        toggleButton.innerText = "Show " + currentText.slice(1).join(" ");
     }
 }
 

@@ -1,18 +1,14 @@
-//import {defaultListingsData} from defaultListingsData.js;
-
 const form = document.querySelector('#listing-form');
 form.addEventListener('submit', handleSubmit);
 
 let curr_listings = JSON.parse(localStorage.listingsData);
-console.log(curr_listings);
 
 function enablePrice(){
     document.querySelector("#priceInput").disabled = false;
-
 }
+
 function disablePrice(){
-        document.querySelector("#priceInput").disabled = true;
-    
+    document.querySelector("#priceInput").disabled = true; 
 }
 
 function handleSubmit(event) {
@@ -46,14 +42,10 @@ function handleSubmit(event) {
 
     if (localStorage.listingsData === undefined) {
         localStorage.listingsData = JSON.stringify(defaultListingsData);
-        //console.log("listings:", JSON.stringify(defaultListingsData));
     }
     let curr_listings = JSON.parse(localStorage.listingsData);
     //make sure required fields were defined 
-
-
     
-    //console.log(curr_listings);
     if(value["name"] != "" && value["description"] != ""){
         curr_listings.push(value);
         localStorage.listingsData = JSON.stringify(curr_listings);
@@ -62,7 +54,4 @@ function handleSubmit(event) {
     } else {
         alert("You may be missing some fields, please fill in name and description then try again.");
     }
-    
-    
-
   }

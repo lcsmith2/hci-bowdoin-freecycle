@@ -190,7 +190,7 @@ color: #000;
 
 .homecategory {
    display: flex;
-   flex-direction: row;
+   flex-direction: column;
    align-items: center; 
    column-gap: 20px;
 }
