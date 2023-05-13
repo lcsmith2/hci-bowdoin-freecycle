@@ -1,7 +1,6 @@
 # Bowdoin FreeCycle
 Link to repository: https://github.com/lcsmith2/hci-bowdoin-freecycle
 
-Inside this subfolder, you should also include a Markdown documentation file named README.md.  You may structure your documentation as you see fit, but it must be clear how to configure and use your project.  Answer any questions that a potential, non-expert user might have if they opened your project and read the documentation.
 
 ## Starting the Web Server and Viewing the Website
 First, download the files from this repository and save them to a location you'll remember.
